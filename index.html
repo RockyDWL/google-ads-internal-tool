@@ -463,10 +463,10 @@
 <div class="hero">
   <div class="hero-label">Project Description · Internal Use Only</div>
   <h1>Google Ads Internal<br>Management Tool</h1>
-  <p>A private internal system for monitoring and reporting on our organization's Google Ads campaigns using the Google Ads API.</p>
+  <p>A private internal system for monitoring and reporting on my account's Google Ads campaigns using the Google Ads API.</p>
   <div class="hero-note">
     <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/><path d="M12 8v4m0 4h.01" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
-    This page is provided for Google Ads API access review purposes only. The actual tool runs on our private internal infrastructure and is not publicly accessible.
+    This page is provided for Google Ads API access review purposes only. The actual tool runs on my private local infrastructure and is not publicly accessible.
   </div>
 </div>
 
@@ -475,7 +475,7 @@
 
   <!-- Review note -->
   <div class="review-note">
-    ⚠️ <span><strong>For Google Review Team:</strong> This document describes our internal advertising management tool. We are applying for Basic Access to the Google Ads API to support internal campaign reporting. All usage is restricted to advertising accounts owned and operated by our organization.</span>
+    ⚠️ <span><strong>For Google Review Team:</strong> This document describes our internal advertising management tool. We are applying for Basic Access to the Google Ads API to support internal campaign reporting. All usage is restricted to advertising accounts owned and operated by me personally.</span>
   </div>
 
   <!-- Overview -->
@@ -486,8 +486,8 @@
       </div>
       <h2>Project Overview</h2>
     </div>
-    <p>This project is an internal software tool developed to help our advertising team manage, monitor, and analyze our own Google Ads accounts using the Google Ads API.</p>
-    <p>The system retrieves campaign performance data, generates internal reports, and provides campaign monitoring insights — exclusively for the advertising operations of our organization.</p>
+    <p>This project is an internal software tool developed to help myself (the account owner) manage, monitor, and analyze our own Google Ads accounts using the Google Ads API.</p>
+    <p>The system retrieves campaign performance data, generates internal reports, and provides campaign monitoring insights — exclusively for the advertising operations of my account.</p>
     <p>This tool is strictly designed for internal operational use only. It is not a SaaS product, not a third-party management service, and does not access or manage any external client accounts.</p>
   </div>
 
@@ -506,7 +506,7 @@
       </div>
       <div class="contact-item">
         <div class="contact-label">Primary Contact</div>
-        <div class="contact-value">dwl07947035150@gmail.com</div>
+        <div class="contact-value"><a href="mailto:dwl07947035150@gmail.com">dwl07947035150@gmail.com</a></div>
       </div>
       <div class="contact-item">
         <div class="contact-label">Tool Type</div>
@@ -521,6 +521,24 @@
         <div class="contact-value">Basic Access (Pending Review)</div>
       </div>
     </div>
+
+  <!-- API Usage Scope -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+      </div>
+      <h2>API Usage Scope &amp; Intent</h2>
+    </div>
+    <p>I am applying to upgrade from <strong>Test Access</strong> to <strong>Basic Access</strong> in order to retrieve live campaign data from my own Google Ads account for personal reporting and optimization.</p>
+    <p style="margin-top:12px; font-size:14px; color:var(--gray-3); font-weight:600;">Google Ads API resources this tool will access:</p>
+    <div class="feature-grid" style="margin-top:10px;">
+      <div class="feature-item"><div class="feature-dot"></div>GoogleAdsService — search campaign & ad group metrics</div>
+      <div class="feature-item"><div class="feature-dot"></div>CampaignService — read campaign status and settings</div>
+      <div class="feature-item"><div class="feature-dot"></div>KeywordPlanIdeaService — keyword performance data</div>
+      <div class="feature-item"><div class="feature-dot"></div>ReportingService — impressions, clicks, CTR, spend</div>
+    </div>
+    <p style="margin-top:16px; font-size:13.5px; color:var(--gray-3);">All API calls are read-only. No campaigns, bids, or budgets will be created or modified through this tool. The tool does not access any accounts other than my own.</p>
   </div>
 
   <!-- Key Features -->
@@ -534,10 +552,10 @@
     <div class="feature-grid">
       <div class="feature-item"><div class="feature-dot"></div>Retrieve campaign performance data</div>
       <div class="feature-item"><div class="feature-dot"></div>Monitor keyword and ad group metrics</div>
-      <div class="feature-item"><div class="feature-dot"></div>Track advertising spend across accounts</div>
+      <div class="feature-item"><div class="feature-dot"></div>Track advertising spend for my account</div>
       <div class="feature-item"><div class="feature-dot"></div>Generate automated performance reports</div>
       <div class="feature-item"><div class="feature-dot"></div>Analyze advertising trends internally</div>
-      <div class="feature-item"><div class="feature-dot"></div>Internal campaign monitoring dashboard</div>
+      <div class="feature-item"><div class="feature-dot"></div>Personal campaign monitoring dashboard</div>
     </div>
   </div>
 
@@ -551,17 +569,17 @@
     </div>
     <p style="color:var(--gray-3); font-size:14px; margin-bottom:16px;">The tool uses a straightforward server-side architecture. No data is ever exposed publicly.</p>
     <div class="arch-diagram">
-      <div class="arch-node">Internal Team Member</div>
+      <div class="arch-node">Wenlong Du (Account Owner)</div>
       <div class="arch-arrow"><div class="arch-arrow-line"></div><div class="arch-arrow-head"></div></div>
-      <div class="arch-node">Private Internal Dashboard</div>
+      <div class="arch-node">Personal Dashboard (Local)</div>
       <div class="arch-arrow"><div class="arch-arrow-line"></div><div class="arch-arrow-head"></div></div>
       <div class="arch-node highlight">Application Server (OAuth2)</div>
       <div class="arch-arrow"><div class="arch-arrow-line"></div><div class="arch-arrow-head"></div></div>
       <div class="arch-node">Google Ads API</div>
       <div class="arch-arrow"><div class="arch-arrow-line"></div><div class="arch-arrow-head"></div></div>
-      <div class="arch-node">Our Advertising Account Data</div>
+      <div class="arch-node">My Personal Google Ads Account Data</div>
     </div>
-    <p style="margin-top:16px; font-size:14px; color:var(--gray-3);">OAuth2 authentication is used to securely authorize API access. Retrieved data is stored on our private internal server and used exclusively for reporting and analysis.</p>
+    <p style="margin-top:16px; font-size:14px; color:var(--gray-3);">OAuth2 authentication is used to securely authorize API access. Retrieved data is stored on my private local server and used exclusively for reporting and analysis.</p>
   </div>
 
   <!-- Workflow -->
@@ -579,19 +597,19 @@
       </div>
       <div class="workflow-step">
         <div class="step-num">2</div>
-        <div class="step-text">The Google Ads API retrieves campaign performance data — including impressions, clicks, CTR, spend, and keyword metrics — for accounts owned by our organization.</div>
+        <div class="step-text">The Google Ads API retrieves campaign performance data — including impressions, clicks, CTR, spend, and keyword metrics — for accounts owned by me personally.</div>
       </div>
       <div class="workflow-step">
         <div class="step-num">3</div>
-        <div class="step-text">Retrieved data is processed and stored on our private internal server database.</div>
+        <div class="step-text">Retrieved data is processed and stored on my private local server database.</div>
       </div>
       <div class="workflow-step">
         <div class="step-num">4</div>
-        <div class="step-text">Internal dashboards generate campaign monitoring reports and performance summaries.</div>
+        <div class="step-text">My personal dashboard generates campaign monitoring reports and performance summaries.</div>
       </div>
       <div class="workflow-step">
         <div class="step-num">5</div>
-        <div class="step-text">Our advertising team reviews the reports to optimize campaign performance. All operations are restricted to accounts owned by our organization.</div>
+        <div class="step-text">I (Wenlong Du) review the reports to optimize my campaign performance. All operations are restricted to my own Google Ads account.</div>
       </div>
     </div>
   </div>
@@ -615,7 +633,7 @@
       <tbody>
         <tr>
           <td>Campaign performance metrics</td>
-          <td>Internal reporting & optimization</td>
+          <td>Personal reporting &amp; optimization</td>
           <td>❌ Never</td>
         </tr>
         <tr>
@@ -635,7 +653,7 @@
         </tr>
       </tbody>
     </table>
-    <p style="margin-top:16px; font-size:13.5px; color:var(--gray-3);">API data retrieved through this tool will never be sold, shared, transferred, or disclosed to any third party under any circumstance. All data is used exclusively for internal advertising management.</p>
+    <p style="margin-top:16px; font-size:13.5px; color:var(--gray-3);">API data retrieved through this tool will never be sold, shared, transferred, or disclosed to any third party under any circumstance. All data is used exclusively for my own personal advertising management.</p>
   </div>
 
   <!-- Security -->
@@ -648,10 +666,10 @@
     </div>
     <ul class="security-list">
       <li><span class="check">✓</span> OAuth2 authentication for all Google Ads API access — client credentials stored server-side only, never exposed in frontend code</li>
-      <li><span class="check">✓</span> Internal user authentication required to access the dashboard system</li>
-      <li><span class="check">✓</span> No public-facing endpoints — the dashboard is only accessible within our internal network</li>
+      <li><span class="check">✓</span> Password-protected access — only I can log in to the personal dashboard</li>
+      <li><span class="check">✓</span> No public-facing endpoints — the dashboard is only accessible within my local development environment</li>
       <li><span class="check">✓</span> Access tokens are securely stored server-side and never persisted in browser storage</li>
-      <li><span class="check">✓</span> Only accounts owned or operated by our organization are accessed — no third-party client accounts</li>
+      <li><span class="check">✓</span> Only accounts owned or operated by me personally are accessed — no third-party client accounts</li>
     </ul>
   </div>
 
@@ -683,13 +701,13 @@
       </div>
       <h2>Privacy Policy</h2>
     </div>
-    <p>This internal tool accesses only Google Ads campaign data — including performance metrics, keyword data, spend data, and impressions — from advertising accounts managed directly by our organization.</p>
+    <p>This internal tool accesses only Google Ads campaign data — including performance metrics, keyword data, spend data, and impressions — from advertising accounts managed directly by me personally.</p>
     <p><strong>No personal user information</strong> is collected, processed, or stored by this system at any time.</p>
     <p>All retrieved advertising data is:</p>
     <ul style="padding-left:0; list-style:none; display:flex; flex-direction:column; gap:8px; margin: 12px 0;">
-      <li style="display:flex; gap:8px; font-size:14px; color:var(--gray-2);"><span style="color:var(--green)">✓</span> Used exclusively for internal reporting and campaign monitoring</li>
-      <li style="display:flex; gap:8px; font-size:14px; color:var(--gray-2);"><span style="color:var(--green)">✓</span> Stored on secured internal servers with restricted access</li>
-      <li style="display:flex; gap:8px; font-size:14px; color:var(--gray-2);"><span style="color:var(--green)">✓</span> Accessible only to authorized members of our internal advertising team</li>
+      <li style="display:flex; gap:8px; font-size:14px; color:var(--gray-2);"><span style="color:var(--green)">✓</span> Used exclusively for my personal reporting and campaign monitoring</li>
+      <li style="display:flex; gap:8px; font-size:14px; color:var(--gray-2);"><span style="color:var(--green)">✓</span> Stored on my private local server, accessible only to me</li>
+      <li style="display:flex; gap:8px; font-size:14px; color:var(--gray-2);"><span style="color:var(--green)">✓</span> Accessible only to me — I am the sole user and account owner</li>
       <li style="display:flex; gap:8px; font-size:14px; color:var(--gray-2);"><span style="color:var(--green)">✓</span> Retained only as long as needed for operational reporting purposes</li>
       <li style="display:flex; gap:8px; font-size:14px; color:var(--gray-2);"><span style="color:var(--green)">✓</span> Never sold, shared, transferred, or disclosed to any third party</li>
     </ul>
@@ -700,20 +718,18 @@
       <div class="contact-grid">
         <div class="contact-item">
           <div class="contact-label">Email</div>
-          <div class="contact-value">dwl07947035150@gmail.com</div>
+          <div class="contact-value"><a href="mailto:dwl07947035150@gmail.com">dwl07947035150@gmail.com</a></div>
         </div>
         <div class="contact-item">
-          <div class="contact-label">Developer / Company</div>
-          <div class="contact-value">RockyDWL</div>
+          <div class="contact-label">Developer</div>
+          <div class="contact-value">Wenlong Du (RockyDWL)</div>
         </div>
       </div>
     </div>
   </div>
 
-</div>
-
 <div class="footer">
-  Last Updated: March 2026 &nbsp;·&nbsp; RockyDWL &nbsp;·&nbsp; Google Ads API Access Review &nbsp;·&nbsp; Independent Developer
+  Last Updated: March 2026 &nbsp;·&nbsp; RockyDWL — Wenlong Du &nbsp;·&nbsp; Google Ads API Access Review &nbsp;·&nbsp; Independent Developer
 </div>
 
 </body>
