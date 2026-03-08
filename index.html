@@ -2,299 +2,714 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Google Ads Internal Management Tool</title>
+<title>Google Ads Internal Management Tool — Project Description</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --blue: #1a73e8;
+    --blue-light: #e8f0fe;
+    --blue-dark: #0d47a1;
+    --green: #1e8e3e;
+    --green-light: #e6f4ea;
+    --gray-1: #202124;
+    --gray-2: #3c4043;
+    --gray-3: #5f6368;
+    --gray-4: #9aa0a6;
+    --gray-5: #dadce0;
+    --gray-6: #f1f3f4;
+    --gray-7: #fafafa;
+    --white: #ffffff;
+    --radius: 10px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
+  }
 
-body{
-font-family: Arial, Helvetica, sans-serif;
-max-width: 920px;
-margin:auto;
-padding:40px;
-line-height:1.65;
-color:#333;
-background:#fafafa;
-}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-h1{
-color:#202124;
-}
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--gray-7);
+    color: var(--gray-1);
+    line-height: 1.7;
+    font-size: 15px;
+  }
 
-h2{
-margin-top:45px;
-border-bottom:1px solid #e2e2e2;
-padding-bottom:8px;
-}
+  /* ── Header ── */
+  .header {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-5);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
 
-p{
-margin-top:10px;
-}
+  .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--gray-1);
+  }
 
-ul{
-margin-top:10px;
-}
+  .header-brand svg {
+    width: 28px; height: 28px;
+  }
 
-ol{
-margin-top:10px;
-}
+  .header-badge {
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    background: var(--blue-light);
+    color: var(--blue);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
 
-.box{
-background:white;
-padding:20px;
-border-radius:8px;
-box-shadow:0 2px 6px rgba(0,0,0,0.05);
-margin-top:20px;
-}
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(135deg, #0d47a1 0%, #1a73e8 60%, #42a5f5 100%);
+    color: white;
+    padding: 72px 40px 64px;
+    text-align: center;
+  }
 
-.footer{
-margin-top:60px;
-font-size:14px;
-color:#666;
-}
+  .hero-label {
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 16px;
+  }
 
-.diagram{
-background:#f5f7fa;
-padding:20px;
-border-radius:6px;
-margin-top:15px;
-font-family:monospace;
-}
+  .hero h1 {
+    font-size: 36px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+    line-height: 1.25;
+  }
 
+  .hero p {
+    font-size: 17px;
+    opacity: 0.88;
+    max-width: 580px;
+    margin: 0 auto 28px;
+  }
+
+  .hero-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 8px 18px;
+    border-radius: 6px;
+    backdrop-filter: blur(4px);
+  }
+
+  /* ── Layout ── */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  .section {
+    background: var(--white);
+    border: 1px solid var(--gray-5);
+    border-radius: var(--radius);
+    padding: 32px 36px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--gray-6);
+  }
+
+  .section-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .icon-blue  { background: var(--blue-light); }
+  .icon-green { background: var(--green-light); }
+  .icon-gray  { background: var(--gray-6); }
+
+  .section-icon svg { width: 18px; height: 18px; }
+
+  .section h2 {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--gray-1);
+  }
+
+  .section p {
+    color: var(--gray-2);
+    margin-bottom: 12px;
+  }
+
+  .section p:last-child { margin-bottom: 0; }
+
+  /* ── Feature Grid ── */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 4px;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 16px;
+    background: var(--gray-6);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--gray-2);
+  }
+
+  .feature-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--blue);
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+
+  /* ── Architecture Diagram ── */
+  .arch-diagram {
+    background: var(--gray-6);
+    border-radius: 8px;
+    padding: 28px;
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .arch-node {
+    background: var(--white);
+    border: 1.5px solid var(--gray-5);
+    border-radius: 8px;
+    padding: 10px 28px;
+    font-size: 13px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    color: var(--gray-1);
+    text-align: center;
+    min-width: 220px;
+  }
+
+  .arch-node.highlight {
+    border-color: var(--blue);
+    background: var(--blue-light);
+    color: var(--blue-dark);
+  }
+
+  .arch-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--gray-4);
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    padding: 4px 0;
+    gap: 2px;
+  }
+
+  .arch-arrow-line {
+    width: 1.5px;
+    height: 22px;
+    background: var(--gray-4);
+  }
+
+  .arch-arrow-head {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 7px solid var(--gray-4);
+  }
+
+  /* ── Workflow Steps ── */
+  .workflow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 4px;
+  }
+
+  .workflow-step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 14px 0;
+  }
+
+  .workflow-step:not(:last-child) {
+    border-bottom: 1px solid var(--gray-6);
+  }
+
+  .step-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--blue);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .step-text {
+    font-size: 14px;
+    color: var(--gray-2);
+    padding-top: 3px;
+  }
+
+  /* ── Compliance Badges ── */
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  .badge-green {
+    background: var(--green-light);
+    color: var(--green);
+    border: 1px solid #a8d5b5;
+  }
+
+  .badge-blue {
+    background: var(--blue-light);
+    color: var(--blue-dark);
+    border: 1px solid #a8c4f0;
+  }
+
+  /* ── Security List ── */
+  .security-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .security-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--gray-2);
+    padding: 12px 16px;
+    background: var(--gray-6);
+    border-radius: 8px;
+  }
+
+  .check {
+    color: var(--green);
+    font-size: 15px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── Contact Block ── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 8px;
+  }
+
+  .contact-item {
+    background: var(--gray-6);
+    border-radius: 8px;
+    padding: 14px 18px;
+  }
+
+  .contact-label {
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray-4);
+    margin-bottom: 4px;
+  }
+
+  .contact-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gray-1);
+  }
+
+  .contact-value a {
+    color: var(--blue);
+    text-decoration: none;
+  }
+
+  /* ── Review Note ── */
+  .review-note {
+    background: #fffbe6;
+    border: 1px solid #f6d860;
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 13.5px;
+    color: #5f4b00;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.6;
+  }
+
+  /* ── Privacy Table ── */
+  .privacy-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+
+  .privacy-table th {
+    background: var(--gray-6);
+    padding: 10px 16px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--gray-2);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .privacy-table td {
+    padding: 11px 16px;
+    border-top: 1px solid var(--gray-6);
+    color: var(--gray-2);
+    vertical-align: top;
+  }
+
+  .privacy-table tr:hover td {
+    background: var(--gray-7);
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    font-size: 13px;
+    color: var(--gray-4);
+    padding: 32px 0 48px;
+    font-family: 'DM Mono', monospace;
+    border-top: 1px solid var(--gray-5);
+    margin-top: 12px;
+  }
+
+  @media (max-width: 640px) {
+    .hero { padding: 48px 20px; }
+    .hero h1 { font-size: 26px; }
+    .section { padding: 24px 20px; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .header { padding: 0 20px; }
+  }
 </style>
 </head>
-
-
 <body>
 
-<h1>Google Ads Internal Management Tool</h1>
+<!-- Header -->
+<header class="header">
+  <div class="header-brand">
+    <svg viewBox="0 0 28 28" fill="none">
+      <rect width="28" height="28" rx="6" fill="#1a73e8"/>
+      <path d="M7 14h14M14 7v14" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+      <circle cx="14" cy="14" r="4" stroke="white" stroke-width="2"/>
+    </svg>
+    Google Ads Internal Tool
+  </div>
+  <span class="header-badge">API Access Review</span>
+</header>
 
-<div class="box">
-
-<h2>Project Overview</h2>
-
-<p>
-This project is an internal software tool developed to help our team manage and monitor our own Google Ads accounts using the Google Ads API.
-</p>
-
-<p>
-The system retrieves advertising campaign data, generates internal reports, and provides campaign performance insights for internal advertising management.
-</p>
-
-<p>
-This tool is strictly designed for internal operational use only and is not available as a public product or service.
-</p>
-
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-label">Project Description · Internal Use Only</div>
+  <h1>Google Ads Internal<br>Management Tool</h1>
+  <p>A private internal system for monitoring and reporting on our organization's Google Ads campaigns using the Google Ads API.</p>
+  <div class="hero-note">
+    <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/><path d="M12 8v4m0 4h.01" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+    This page is provided for Google Ads API access review purposes only. The actual tool runs on our private internal infrastructure and is not publicly accessible.
+  </div>
 </div>
 
+<!-- Main Content -->
+<div class="container">
 
-<div class="box">
+  <!-- Review note -->
+  <div class="review-note">
+    ⚠️ <span><strong>For Google Review Team:</strong> This document describes our internal advertising management tool. We are applying for Basic Access to the Google Ads API to support internal campaign reporting. All usage is restricted to advertising accounts owned and operated by our organization.</span>
+  </div>
 
-<h2>Key Features</h2>
+  <!-- Overview -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+      </div>
+      <h2>Project Overview</h2>
+    </div>
+    <p>This project is an internal software tool developed to help our advertising team manage, monitor, and analyze our own Google Ads accounts using the Google Ads API.</p>
+    <p>The system retrieves campaign performance data, generates internal reports, and provides campaign monitoring insights — exclusively for the advertising operations of our organization.</p>
+    <p>This tool is strictly designed for internal operational use only. It is not a SaaS product, not a third-party management service, and does not access or manage any external client accounts.</p>
+  </div>
 
-<ul>
-<li>Retrieve campaign performance data</li>
-<li>Monitor keyword and ad group metrics</li>
-<li>Track advertising spend across multiple accounts</li>
-<li>Generate automated performance reports</li>
-<li>Analyze advertising trends for internal optimization</li>
-<li>Provide internal campaign monitoring dashboards</li>
-</ul>
+  <!-- Organization Info -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round"><path d="M3 21h18M9 21V7l6-4v18M9 12H3v9"/></svg>
+      </div>
+      <h2>Organization Information</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="contact-label">Organization</div>
+        <div class="contact-value">LIVFRESH / Internal Ads Team</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Primary Contact</div>
+        <div class="contact-value"><a href="mailto:dwl07947035150@gmail.com">dwl07947035150@gmail.com</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Tool Type</div>
+        <div class="contact-value">Internal — Not Public-Facing</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">API Access Level</div>
+        <div class="contact-value">Basic Access (Requested)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Features -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <h2>Key Features</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-item"><div class="feature-dot"></div>Retrieve campaign performance data</div>
+      <div class="feature-item"><div class="feature-dot"></div>Monitor keyword and ad group metrics</div>
+      <div class="feature-item"><div class="feature-dot"></div>Track advertising spend across accounts</div>
+      <div class="feature-item"><div class="feature-dot"></div>Generate automated performance reports</div>
+      <div class="feature-item"><div class="feature-dot"></div>Analyze advertising trends internally</div>
+      <div class="feature-item"><div class="feature-dot"></div>Internal campaign monitoring dashboard</div>
+    </div>
+  </div>
+
+  <!-- System Architecture -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-gray">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#5f6368" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <h2>System Architecture</h2>
+    </div>
+    <p style="color:var(--gray-3); font-size:14px; margin-bottom:16px;">The tool uses a straightforward server-side architecture. No data is ever exposed publicly.</p>
+    <div class="arch-diagram">
+      <div class="arch-node">Internal Team Member</div>
+      <div class="arch-arrow"><div class="arch-arrow-line"></div><div class="arch-arrow-head"></div></div>
+      <div class="arch-node">Private Internal Dashboard</div>
+      <div class="arch-arrow"><div class="arch-arrow-line"></div><div class="arch-arrow-head"></div></div>
+      <div class="arch-node highlight">Application Server (OAuth2)</div>
+      <div class="arch-arrow"><div class="arch-arrow-line"></div><div class="arch-arrow-head"></div></div>
+      <div class="arch-node">Google Ads API</div>
+      <div class="arch-arrow"><div class="arch-arrow-line"></div><div class="arch-arrow-head"></div></div>
+      <div class="arch-node">Our Advertising Account Data</div>
+    </div>
+    <p style="margin-top:16px; font-size:14px; color:var(--gray-3);">OAuth2 authentication is used to securely authorize API access. Retrieved data is stored on our private internal server and used exclusively for reporting and analysis.</p>
+  </div>
+
+  <!-- Workflow -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+      <h2>Example Workflow</h2>
+    </div>
+    <div class="workflow">
+      <div class="workflow-step">
+        <div class="step-num">1</div>
+        <div class="step-text">The system authenticates with Google Ads API using OAuth2 with the <code style="background:var(--gray-6); padding:1px 6px; border-radius:4px; font-family:'DM Mono',monospace; font-size:12px;">https://www.googleapis.com/auth/adwords</code> scope.</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-num">2</div>
+        <div class="step-text">The Google Ads API retrieves campaign performance data — including impressions, clicks, CTR, spend, and keyword metrics — for accounts owned by our organization.</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-num">3</div>
+        <div class="step-text">Retrieved data is processed and stored on our private internal server database.</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-num">4</div>
+        <div class="step-text">Internal dashboards generate campaign monitoring reports and performance summaries.</div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-num">5</div>
+        <div class="step-text">Our advertising team reviews the reports to optimize campaign performance. All operations are restricted to accounts owned by our organization.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Usage -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1e8e3e" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+      </div>
+      <h2>Data Usage</h2>
+    </div>
+    <table class="privacy-table">
+      <thead>
+        <tr>
+          <th>Data Type Accessed</th>
+          <th>Purpose</th>
+          <th>Shared Externally?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Campaign performance metrics</td>
+          <td>Internal reporting & optimization</td>
+          <td>❌ Never</td>
+        </tr>
+        <tr>
+          <td>Keyword & ad group data</td>
+          <td>Performance monitoring</td>
+          <td>❌ Never</td>
+        </tr>
+        <tr>
+          <td>Advertising spend data</td>
+          <td>Budget tracking</td>
+          <td>❌ Never</td>
+        </tr>
+        <tr>
+          <td>Impressions & click metrics</td>
+          <td>CTR & trend analysis</td>
+          <td>❌ Never</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top:16px; font-size:13.5px; color:var(--gray-3);">API data retrieved through this tool will never be sold, shared, transferred, or disclosed to any third party under any circumstance. All data is used exclusively for internal advertising management.</p>
+  </div>
+
+  <!-- Security -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1e8e3e" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h2>Security &amp; Access Control</h2>
+    </div>
+    <ul class="security-list">
+      <li><span class="check">✓</span> OAuth2 authentication for all Google Ads API access — client credentials stored server-side only, never exposed in frontend code</li>
+      <li><span class="check">✓</span> Internal user authentication required to access the dashboard system</li>
+      <li><span class="check">✓</span> No public-facing endpoints — the dashboard is only accessible within our internal network</li>
+      <li><span class="check">✓</span> Access tokens are securely stored server-side and never persisted in browser storage</li>
+      <li><span class="check">✓</span> Only accounts owned or operated by our organization are accessed — no third-party client accounts</li>
+    </ul>
+  </div>
+
+  <!-- Compliance -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1e8e3e" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h2>Compliance Statement</h2>
+    </div>
+    <p>This project is developed and operated in full compliance with the Google Ads API Terms and Conditions.</p>
+    <div class="badge-row" style="margin: 16px 0;">
+      <span class="badge badge-green">✓ Internal use only</span>
+      <span class="badge badge-green">✓ Not a SaaS platform</span>
+      <span class="badge badge-green">✓ No third-party client access</span>
+      <span class="badge badge-green">✓ No data sold or shared</span>
+      <span class="badge badge-blue">✓ OAuth2 compliant</span>
+      <span class="badge badge-blue">✓ Google API ToS compliant</span>
+    </div>
+    <p style="font-size:14px; color:var(--gray-3);">This tool is not a third-party advertising management service. It does not manage advertising accounts for external clients and is not offered as a product or service to any external party.</p>
+  </div>
+
+  <!-- Privacy Policy -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-gray">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#5f6368" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
+      <h2>Privacy Policy</h2>
+    </div>
+    <p>This internal tool accesses only Google Ads campaign data — including performance metrics, keyword data, spend data, and impressions — from advertising accounts managed directly by our organization.</p>
+    <p><strong>No personal user information</strong> is collected, processed, or stored by this system at any time.</p>
+    <p>All retrieved advertising data is:</p>
+    <ul style="padding-left:0; list-style:none; display:flex; flex-direction:column; gap:8px; margin: 12px 0;">
+      <li style="display:flex; gap:8px; font-size:14px; color:var(--gray-2);"><span style="color:var(--green)">✓</span> Used exclusively for internal reporting and campaign monitoring</li>
+      <li style="display:flex; gap:8px; font-size:14px; color:var(--gray-2);"><span style="color:var(--green)">✓</span> Stored on secured internal servers with restricted access</li>
+      <li style="display:flex; gap:8px; font-size:14px; color:var(--gray-2);"><span style="color:var(--green)">✓</span> Accessible only to authorized members of our internal advertising team</li>
+      <li style="display:flex; gap:8px; font-size:14px; color:var(--gray-2);"><span style="color:var(--green)">✓</span> Retained only as long as needed for operational reporting purposes</li>
+      <li style="display:flex; gap:8px; font-size:14px; color:var(--gray-2);"><span style="color:var(--green)">✓</span> Never sold, shared, transferred, or disclosed to any third party</li>
+    </ul>
+
+    <!-- Contact -->
+    <div style="margin-top:24px; padding-top:20px; border-top:1px solid var(--gray-6);">
+      <p style="font-size:13px; color:var(--gray-3); margin-bottom:12px;">For any questions regarding this project or its use of the Google Ads API, please contact:</p>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-label">Email</div>
+          <div class="contact-value"><a href="mailto:dwl07947035150@gmail.com">dwl07947035150@gmail.com</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">Organization</div>
+          <div class="contact-value">LIVFRESH Internal Ads Team</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
-
-
-<div class="box">
-
-<h2>Example Internal Dashboard</h2>
-
-<p>
-The internal system provides a dashboard interface where our team can review advertising performance across accounts.
-</p>
-
-<div class="diagram">
-
-Campaign Overview Dashboard
-
----------------------------------------------
-
-Account: Main Advertising Account  
-Campaigns Active: 12  
-
-Spend Today: $132  
-Spend This Month: $2,845  
-
-Top Campaign Performance
-
-Campaign A – CTR 6.3%  
-Campaign B – CTR 5.9%  
-Campaign C – CTR 4.8%
-
-Keyword Monitoring
-
-keyword A – conversions: 12  
-keyword B – conversions: 9  
-keyword C – conversions: 6
-
----------------------------------------------
-
-</div>
-
-<p>
-This dashboard is only accessible internally by our advertising team.
-</p>
-
-</div>
-
-
-<div class="box">
-
-<h2>System Architecture</h2>
-
-<p>
-The internal tool follows a simple and secure architecture designed for internal reporting and monitoring.
-</p>
-
-<div class="diagram">
-
-User (Internal Team)
-        │
-        ▼
-Internal Dashboard Interface
-        │
-        ▼
-Application Server
-        │
-        ▼
-Google Ads API
-        │
-        ▼
-Advertising Account Data
-
-</div>
-
-<p>
-OAuth2 authentication is used to securely authorize access to the Google Ads API.
-</p>
-
-<p>
-Retrieved data is stored in an internal database and used for reporting and analysis.
-</p>
-
-</div>
-
-
-<div class="box">
-
-<h2>Example Workflow</h2>
-
-<ol>
-<li>The system authenticates with Google Ads using OAuth2.</li>
-<li>The Google Ads API retrieves campaign performance data.</li>
-<li>The data is processed and stored in the internal database.</li>
-<li>Internal dashboards generate campaign monitoring reports.</li>
-<li>Our team reviews the reports to optimize advertising performance.</li>
-</ol>
-
-<p>
-All operations are restricted to accounts owned or internally managed by our organization.
-</p>
-
-</div>
-
-
-<div class="box">
-
-<h2>Data Usage</h2>
-
-<p>
-The Google Ads API is used only to retrieve advertising data from accounts that belong to our organization.
-</p>
-
-<p>
-The collected data is used exclusively for internal reporting, campaign monitoring, and advertising performance analysis.
-</p>
-
-<p>
-No third-party customer accounts are accessed or managed by this tool.
-</p>
-
-</div>
-
-
-<div class="box">
-
-<h2>Security & Access Control</h2>
-
-<ul>
-<li>OAuth2 authentication for Google Ads API access</li>
-<li>Internal user authentication for system access</li>
-<li>Restricted internal dashboard access</li>
-<li>No external public access</li>
-</ul>
-
-<p>
-The system is hosted privately and is only accessible to our internal advertising team.
-</p>
-
-</div>
-
-
-<div class="box">
-
-<h2>Compliance Statement</h2>
-
-<p>
-This project complies with the Google Ads API Terms and Conditions.
-</p>
-
-<p>
-The tool is developed solely for internal advertising management and analytics.
-</p>
-
-<p>
-It is not a SaaS platform, not a third-party advertising management service, and is not used to manage advertising accounts for external clients.
-</p>
-
-</div>
-
-
-<div class="box">
-
-<h2>Contact</h2>
-
-<p>
-If Google requires additional information regarding this project or its use of the Google Ads API, please contact:
-</p>
-
-<p>
-Email: dwl07947035150@gmail.com
-</p>
-
-</div>
-
-
-<div class="box">
-
-<h2>Privacy Policy</h2>
-
-<p>
-This internal tool accesses only Google Ads campaign data from advertising accounts managed by our organization.
-</p>
-
-<p>
-No personal user information is collected, processed, or stored by this system.
-</p>
-
-<p>
-All retrieved advertising data is used exclusively for internal reporting and campaign monitoring purposes.
-</p>
-
-</div>
-
 
 <div class="footer">
-Last Updated: March 2026
+  Last Updated: March 2026 &nbsp;·&nbsp; Internal Project Description &nbsp;·&nbsp; Google Ads API Access Review
 </div>
 
 </body>
