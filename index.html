@@ -114,7 +114,7 @@ footer p + p { margin-top: 6px; }
     <span class="badge">GAQL Reporting</span>
     <span class="badge">Single Account</span>
     <span class="badge">No Data Modification</span>
-    <span class="badge">Local Storage Only</span>
+    <span class="badge">No External Data Transfer</span>
   </div>
   <a href="dashboard.html" class="hero-btn">View Dashboard →</a>
 </div>
@@ -130,7 +130,7 @@ footer p + p { margin-top: 6px; }
 <div class="section" style="padding-top:56px;" id="overview">
   <div class="section-label">Tool Overview</div>
   <div class="notice-box">
-    ✅ <strong>Compliance Summary:</strong> This tool retrieves campaign performance data from a single Google Ads account via read-only API access. It does not create, modify, or delete any campaigns, bids, or budgets. All data remains local and is never shared externally.
+    ✅ <strong>Compliance Summary:</strong> This tool retrieves campaign performance data from a single Google Ads account via read-only API access. It does not create, modify, or delete any campaigns, bids, or budgets. All data remains local and is never shared externally. Access is strictly limited to the developer — no multi-user functionality or external access is provided.
   </div>
   <div class="card">
     <div class="card-title">What This Tool Does</div>
@@ -302,6 +302,48 @@ ORDER BY metrics.cost_micros DESC</pre></div>
   </div>
 </div>
 
+<div class="section" id="access">
+  <div class="section-label">Data Access &amp; Authorization</div>
+  <div class="card">
+    <div class="card-title">How This Tool Accesses Google Ads Data</div>
+    <div class="card-body">
+      <p>This tool accesses Google Ads campaign data through the official OAuth 2.0 authorization flow. The developer authorizes the tool to connect to a specific Google Ads account using the <code>https://www.googleapis.com/auth/adwords</code> scope. Once authorized, the tool retrieves campaign performance metrics from that account for local reporting and analysis.</p>
+      <p style="margin-top:10px;">All API requests are read-only GAQL queries. No write operations of any kind are performed. Retrieved data is stored locally and is never transmitted to external services or third parties.</p>
+    </div>
+  </div>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Authorization Steps</div>
+      <div class="card-body">
+        <ul>
+          <li>Developer initiates OAuth 2.0 flow via Google</li>
+          <li>Google prompts authorization for the adwords scope</li>
+          <li>Developer grants access to their own Google Ads account</li>
+          <li>Access token stored server-side for API requests</li>
+          <li>Dashboard retrieves and displays campaign data</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Why API Access Is Required</div>
+      <div class="card-body">
+        <ul>
+          <li>Google Ads campaign data is only accessible via the official API</li>
+          <li>OAuth 2.0 is the required authentication method for API access</li>
+          <li>The <code>adwords</code> scope is needed to query campaign metrics</li>
+          <li>GAQL queries require an authorized API session to execute</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:0;">
+    <div class="card-title">Access Restrictions</div>
+    <div class="card-body">
+      <p>Access to this tool is strictly limited to the developer, Wenlong Du. The tool provides no multi-user functionality, no public login system, and no mechanism for external parties to connect or authorize their accounts. Only the developer's own Google Ads account is connected via OAuth 2.0.</p>
+    </div>
+  </div>
+</div>
+
 <div class="section" id="developer">
   <div class="section-label">Developer Information</div>
   <div class="dev-grid">
@@ -312,13 +354,10 @@ ORDER BY metrics.cost_micros DESC</pre></div>
     <div class="dev-item"><div class="dev-label">Accounts Connected</div><div class="dev-value">1 (owner's account)</div></div>
     <div class="dev-item"><div class="dev-label">Write Operations</div><div class="dev-value">None</div></div>
     <div class="dev-item"><div class="dev-label">External Data Sharing</div><div class="dev-value">None</div></div>
-    <div class="dev-item"><div class="dev-label">Contact</div><div class="dev-value"><a href="mailto:dwl07947035150@gmail.com">dwl07947035150@gmail.com</a></div></div>
+    <div class="dev-item"><div class="dev-label">Contact</div><div class="dev-value"><a href="/cdn-cgi/l/email-protection#3652415a06010f020106050307030676515b575f5a1855595b"><span class="__cf_email__" data-cfemail="7b1f0c174b4c424f4c4b484e4a4e4b3b1c161a121755181416">[email&#160;protected]</span></a></div></div>
   </div>
 </div>
 
 <footer>
   <p>© 2026 Wenlong Du (RockyDWL) · Private Google Ads Reporting Tool</p>
-  <p><a href="privacy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms.html">Terms of Service</a> &nbsp;|&nbsp; <a href="dashboard.html">Dashboard</a></p>
-</footer>
-</body>
-</html>
+  <p><a href="privacy.html">Privacy Polic
