@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — RockyDWL Google Ads Tool</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #f7f6f2; --surface: #ffffff; --border: #e2e0d8;
+  --text: #1a1916; --muted: #6b6960; --accent: #2563eb;
+  --accent-light: #eff6ff; --green: #16a34a; --green-light: #f0fdf4;
+  --tag-bg: #f0f0ec; --red: #dc2626; --amber: #d97706;
+}
+body { font-family: 'DM Sans', Arial, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; min-height: 100vh; }
+
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(247,246,242,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 56px;
+}
+.nav-brand { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; color: var(--text); letter-spacing: 0.04em; text-decoration: none; }
+.nav-links { display: flex; gap: 20px; align-items: center; }
+.nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; font-weight: 500; transition: color 0.15s; }
+.nav-links a:hover, .nav-links a.active { color: var(--text); }
+.nav-badge { background: var(--tag-bg); border: 1px solid var(--border); color: var(--muted); font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 5px; }
+
+/* LAYOUT */
+.layout { display: flex; min-height: calc(100vh - 56px); }
+
+aside {
+  width: 210px; background: var(--surface); border-right: 1px solid var(--border);
+  padding: 20px 0; flex-shrink: 0;
+}
+.sidebar-group { margin-bottom: 20px; }
+.sidebar-heading { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 0 16px; margin-bottom: 6px; }
+.sidebar-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 16px; font-size: 13px; color: var(--muted);
+  text-decoration: none; border-radius: 0; transition: all 0.12s;
+  cursor: pointer;
+}
+.sidebar-item:hover { background: var(--bg); color: var(--text); }
+.sidebar-item.active { background: var(--accent-light); color: var(--accent); font-weight: 500; }
+
+/* MAIN */
+main { flex: 1; padding: 24px 28px; overflow-x: auto; }
+
+.page-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+.page-title h1 { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+.page-title p { font-size: 12px; color: var(--muted); margin-top: 3px; font-family: 'DM Mono', monospace; }
+
+.controls { display: flex; gap: 8px; align-items: center; }
+.ctrl { background: var(--surface); border: 1px solid var(--border); color: var(--text); font-size: 13px; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+.ctrl.primary { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 600; }
+select.ctrl { appearance: none; padding-right: 24px; }
+
+/* DATE BAR */
+.date-bar {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  padding: 10px 16px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted);
+}
+.date-chip { background: var(--accent-light); border: 1px solid #bfdbfe; color: var(--accent); font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 5px; }
+.live-dot { display: inline-flex; align-items: center; gap: 5px; color: var(--green); margin-left: auto; }
+.live-dot::before { content: ''; width: 5px; height: 5px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
+
+/* DEMO NOTICE */
+.demo-notice { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 10px 16px; font-size: 12px; color: var(--amber); margin-bottom: 16px; font-family: 'DM Mono', monospace; }
+
+/* KPI GRID */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 20px; }
+.kpi-card { background: var(--surface); padding: 16px 18px; }
+.kpi-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+.kpi-value { font-family: 'DM Mono', monospace; font-size: 22px; font-weight: 500; color: var(--text); }
+.kpi-delta { font-size: 11px; margin-top: 4px; }
+.delta-up { color: var(--green); } .delta-dn { color: var(--red); }
+
+/* TABLE SECTION */
+.table-section { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 20px; }
+.table-head { padding: 12px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.table-head h2 { font-size: 13px; font-weight: 600; }
+.table-head span { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
+table { width: 100%; border-collapse: collapse; }
+th { text-align: left; padding: 8px 16px; font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 1px solid var(--border); font-family: 'DM Mono', monospace; background: var(--tag-bg); white-space: nowrap; }
+td { padding: 10px 16px; border-bottom: 1px solid var(--border); font-size: 13px; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--bg); }
+
+.st-en { display: inline-block; background: var(--green-light); color: var(--green); font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; font-family: 'DM Mono', monospace; }
+.st-pa { display: inline-block; background: #fffbeb; color: var(--amber); font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; font-family: 'DM Mono', monospace; }
+
+/* GAQL */
+.query-section { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 20px; }
+.query-head { padding: 10px 16px; border-bottom: 1px solid var(--border); background: var(--tag-bg); display: flex; align-items: center; gap: 8px; }
+.query-head span { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+.method-badge { background: var(--accent-light); color: var(--accent); font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
+pre { font-family: 'DM Mono', monospace; font-size: 12px; background: #1a1916; color: #e8e6e0; padding: 18px 20px; line-height: 1.8; overflow-x: auto; }
+
+/* FOOTER */
+.dash-footer { border-top: 1px solid var(--border); padding: 16px 28px; font-size: 11px; color: var(--muted); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-family: 'DM Mono', monospace; background: var(--surface); }
+.dash-footer a { color: var(--muted); text-decoration: underline; }
+
+@media(max-width:640px){ aside{display:none} main{padding:16px} }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">ROCKYDWL / ADS-TOOL</a>
+  <div class="nav-links">
+    <a href="index.html">Overview</a>
+    <a href="dashboard.html" class="active">Dashboard</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <span class="nav-badge">INTERNAL</span>
+  </div>
+</nav>
+
+<div class="layout">
+  <aside>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Reporting</div>
+      <a class="sidebar-item active" href="#">📊 Campaign Overview</a>
+      <a class="sidebar-item" href="#">📁 Ad Groups</a>
+      <a class="sidebar-item" href="#">🔑 Keywords</a>
+      <a class="sidebar-item" href="#">📈 Performance Trends</a>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Account</div>
+      <a class="sidebar-item" href="#">⚙️ API Settings</a>
+      <a class="sidebar-item" href="#">🔒 Auth Status</a>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-heading">Legal</div>
+      <a class="sidebar-item" href="privacy.html">🛡 Privacy Policy</a>
+      <a class="sidebar-item" href="terms.html">📄 Terms of Service</a>
+    </div>
+  </aside>
+
+  <main>
+    <div class="page-header">
+      <div class="page-title">
+        <h1>Campaign Performance Dashboard</h1>
+        <p>GoogleAdsService · Read-Only · Wenlong Du · 1 Account</p>
+      </div>
+      <div class="controls">
+        <select class="ctrl">
+          <option>Last 30 days</option>
+          <option>Last 7 days</option>
+          <option>This month</option>
+          <option>Last month</option>
+        </select>
+        <button class="ctrl primary">↻ Refresh Data</button>
+      </div>
+    </div>
+
+    <div class="date-bar">
+      <span>PERIOD</span>
+      <span class="date-chip">2025-02-25 → 2025-03-25</span>
+      <span class="live-dot">API Connected · Read-Only</span>
+    </div>
+
+    <div class="demo-notice">
+      ℹ️ DEMO VIEW — Sample data shown for interface documentation. Live data retrieved on demand via Google Ads API OAuth2 session.
+    </div>
+
+    <!-- KPI -->
+    <div class="kpi-grid">
+      <div class="kpi-card"><div class="kpi-label">Impressions</div><div class="kpi-value">48,312</div><div class="kpi-delta delta-up">▲ 12.4% vs prev</div></div>
+      <div class="kpi-card"><div class="kpi-label">Clicks</div><div class="kpi-value">1,847</div><div class="kpi-delta delta-up">▲ 8.1% vs prev</div></div>
+      <div class="kpi-card"><div class="kpi-label">Avg. CTR</div><div class="kpi-value">3.82%</div><div class="kpi-delta delta-dn">▼ 0.3% vs prev</div></div>
+      <div class="kpi-card"><div class="kpi-label">Total Cost</div><div class="kpi-value">$312.40</div><div class="kpi-delta delta-up">▲ 5.9% vs prev</div></div>
+      <div class="kpi-card"><div class="kpi-label">Conversions</div><div class="kpi-value">34</div><div class="kpi-delta delta-up">▲ 21.4% vs prev</div></div>
+      <div class="kpi-card"><div class="kpi-label">Cost / Conv.</div><div class="kpi-value">$9.19</div><div class="kpi-delta delta-up">▼ 12.8% vs prev</div></div>
+    </div>
+
+    <!-- CAMPAIGN TABLE -->
+    <div class="table-section">
+      <div class="table-head">
+        <h2>Campaign Breakdown</h2>
+        <span>Retrieved via GoogleAdsService · GAQL · Read-Only</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Campaign Name</th><th>Status</th><th>Impressions</th><th>Clicks</th><th>CTR</th><th>Cost</th><th>Conv.</th><th>CPA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Brand Search — Exact</strong></td>
+            <td><span class="st-en">ENABLED</span></td>
+            <td>12,410</td><td>687</td><td style="color:var(--green)">5.54%</td><td>$82.40</td><td>14</td><td>$5.89</td>
+          </tr>
+          <tr>
+            <td><strong>Non-Brand Search — Broad</strong></td>
+            <td><span class="st-en">ENABLED</span></td>
+            <td>19,880</td><td>621</td><td>3.12%</td><td>$134.20</td><td>11</td><td>$12.20</td>
+          </tr>
+          <tr>
+            <td><strong>Competitor Keywords</strong></td>
+            <td><span class="st-en">ENABLED</span></td>
+            <td>8,750</td><td>318</td><td>3.63%</td><td>$61.30</td><td>6</td><td>$10.22</td>
+          </tr>
+          <tr>
+            <td><strong>Remarketing — Past Visitors</strong></td>
+            <td><span class="st-en">ENABLED</span></td>
+            <td>5,920</td><td>182</td><td>3.07%</td><td>$28.10</td><td>3</td><td>$9.37</td>
+          </tr>
+          <tr>
+            <td><strong>Display — Awareness</strong></td>
+            <td><span class="st-pa">PAUSED</span></td>
+            <td>1,352</td><td>39</td><td style="color:var(--red)">2.88%</td><td>$6.40</td><td>0</td><td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- GAQL -->
+    <div class="query-section">
+      <div class="query-head">
+        <span class="method-badge">GAQL</span>
+        <span>Sample API query used by this tool (GoogleAdsService · Read-Only)</span>
+      </div>
+      <pre>SELECT
+  campaign.id,
+  campaign.name,
+  campaign.status,
+  metrics.impressions,
+  metrics.clicks,
+  metrics.ctr,
+  metrics.cost_micros,
+  metrics.conversions,
+  metrics.cost_per_conversion
+FROM campaign
+WHERE segments.date DURING LAST_30_DAYS
+ORDER BY metrics.cost_micros DESC</pre>
+    </div>
+  </main>
+</div>
+
+<div class="dash-footer">
+  <span>RockyDWL Ads Tool · Wenlong Du · Read-Only Google Ads API · 1 Account · Local Storage Only</span>
+  <span><a href="privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="terms.html">Terms of Service</a> &nbsp;·&nbsp; <a href="index.html">Overview</a></span>
+</div>
+
+</body>
+</html>
