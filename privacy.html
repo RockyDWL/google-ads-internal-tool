@@ -119,11 +119,17 @@ footer a { color:var(--muted);text-decoration:underline; }
   <div class="policy-block">
     <h2>10. Contact</h2>
     <p>For any questions about this Privacy Policy, please contact:</p>
-    <p>Wenlong Du (RockyDWL) &nbsp;·&nbsp; <a href="mailto:dwl07947035150&#64;gmail&#46;com">dwl07947035150&#64;gmail&#46;com</a></p>
+    <p>Wenlong Du (RockyDWL) &nbsp;·&nbsp; <span id="contact-email"></span></p>
+    <script>
+      (function(){
+        var u='dwl07947035150';
+        var d='gmail.com';
+        var e=u+'@'+d;
+        var a=document.getElementById('contact-email');
+        a.innerHTML='<a href="mailto:'+e+'">'+e+'</a>';
+      })();
+    </script>
   </div>
 </d
 <footer>
-  <p>© 2026 Wenlong Du (RockyDWL) &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;|&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms.html">Terms of Service</a> &nbsp;|&nbsp; <a href="dashboard.html">Dashboard</a></p>
-</footer>
-</body>
-</html>
+  <p>© 2026 Wenlong Du (RockyDWL) &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;|&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms.html">Terms of Service</a> &nbsp;|&nbsp; <a href="dashb
