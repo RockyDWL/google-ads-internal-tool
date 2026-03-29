@@ -7,17 +7,19 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root { --bg:#f7f6f2;--surface:#fff;--border:#e2e0d8;--text:#1a1916;--muted:#6b6960;--accent:#2563eb;--tag-bg:#f0f0ec; }
+:root { --bg:#f7f6f2;--surface:#fff;--border:#e2e0d8;--text:#1a1916;--muted:#6b6960;--accent:#2563eb;--tag-bg:#f0f0ec;--green:#16a34a;--green-light:#f0fdf4; }
 body { font-family: 'DM Sans', Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; font-size: 15px; }
 nav { position:sticky;top:0;z-index:100;background:rgba(247,246,242,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:56px; }
 .nav-brand { font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--text);letter-spacing:0.04em;text-decoration:none; }
-.nav-links { display:flex;gap:24px; }
+.nav-links { display:flex;gap:24px;align-items:center; }
 .nav-links a { font-size:13px;color:var(--muted);text-decoration:none;font-weight:500;transition:color 0.15s; }
 .nav-links a:hover { color:var(--text); }
+.nav-cta { background:var(--accent);color:#fff !important;padding:5px 14px;border-radius:6px;font-size:12px !important;font-weight:600 !important;font-family:'DM Mono',monospace; }
 .page { max-width:760px;margin:0 auto;padding:64px 32px; }
 .page-label { font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px; }
 h1 { font-size:32px;font-weight:600;letter-spacing:-0.02em;margin-bottom:8px; }
-.meta { font-size:13px;color:var(--muted);margin-bottom:48px;font-family:'DM Mono',monospace; }
+.meta { font-size:13px;color:var(--muted);margin-bottom:32px;font-family:'DM Mono',monospace; }
+.notice-box { background:var(--green-light);border:1px solid #bbf7d0;border-radius:10px;padding:16px 20px;font-size:13px;color:#15803d;margin-bottom:32px;line-height:1.6; }
 .policy-block { margin-bottom:36px; }
 .policy-block h2 { font-size:16px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border); }
 .policy-block p { font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:10px; }
@@ -27,7 +29,7 @@ h1 { font-size:32px;font-weight:600;letter-spacing:-0.02em;margin-bottom:8px; }
 code { font-family:'DM Mono',monospace;font-size:12px;background:var(--tag-bg);padding:1px 5px;border-radius:3px; }
 footer { border-top:1px solid var(--border);background:var(--surface);padding:24px 32px;text-align:center;font-size:12px;color:var(--muted);font-family:'DM Mono',monospace; }
 footer a { color:var(--muted);text-decoration:underline; }
-@media(max-width:600px){ nav,footer{padding-left:16px;padding-right:16px} .page{padding:40px 16px} }
+@media(max-width:600px){ nav,footer{padding-left:16px;padding-right:16px} .page{padding:40px 16px} .nav-cta{display:none} }
 </style>
 </head>
 <body>
@@ -38,6 +40,7 @@ footer a { color:var(--muted);text-decoration:underline; }
     <a href="index.html">Home</a>
     <a href="privacy.html">Privacy Policy</a>
     <a href="terms.html">Terms of Service</a>
+    <a class="nav-cta" href="dashboard.html">Live Dashboard →</a>
   </div>
 </nav>
 
@@ -45,6 +48,10 @@ footer a { color:var(--muted);text-decoration:underline; }
   <div class="page-label">Legal</div>
   <h1>Terms of Service</h1>
   <div class="meta">Effective Date: March 1, 2026 &nbsp;·&nbsp; Last Updated: March 2026</div>
+
+  <div class="notice-box">
+    ✅ AdsVault is a private internal tool with no public users. These terms define the scope of use and limitations of the tool as required by Google Ads API compliance.
+  </div>
 
   <div class="policy-block">
     <h2>1. Nature of This Tool</h2>
@@ -66,7 +73,13 @@ footer a { color:var(--muted);text-decoration:underline; }
 
   <div class="policy-block">
     <h2>4. Intended Use</h2>
-    <p>This Tool is intended solely for personal use by the developer, Wenlong Du. All API access is restricted to Google Ads accounts personally owned and operated by the developer.</p>
+    <p>This Tool is intended solely for personal use by the developer, Wenlong Du. All API access is restricted to Google Ads accounts personally owned and operated by the developer. Prohibited uses include:</p>
+    <ul>
+      <li>Providing access to the tool or its data to any third party</li>
+      <li>Using the tool to access any Google Ads account other than the developer's own</li>
+      <li>Using the tool to modify, create, pause, or delete any campaigns, ad groups, keywords, or bids</li>
+      <li>Reselling, sublicensing, or commercializing the tool or its outputs in any form</li>
+    </ul>
   </div>
 
   <div class="policy-block">
@@ -82,13 +95,13 @@ footer a { color:var(--muted);text-decoration:underline; }
 
   <div class="policy-block">
     <h2>6. No External User Access</h2>
-    <p>This Tool has no public-facing interface. No external users, clients, or third parties can access, use, or interact with the Tool in any capacity. The dashboard operates on a private local server accessible only to the developer.</p>
+    <p>This Tool has no public-facing interface. No external users, clients, or third parties can access, use, or interact with the Tool in any capacity. The dashboard operates on a private local server accessible only to the developer, Wenlong Du.</p>
   </div>
 
   <div class="policy-block">
     <h2>7. Data Responsibility</h2>
     <p>All advertising data accessed through the Google Ads API belongs to the developer's own accounts. The developer is solely responsible for all API usage and ensures compliance with applicable Google policies at all times. No third-party data is accessed or processed.</p>
-    <p>No advertising data is shared with third parties. The tool does not store or process personal user data.</p>
+    <p>No advertising data is shared with third parties. The tool does not store or process personal user data of any kind.</p>
   </div>
 
   <div class="policy-block">
@@ -104,13 +117,12 @@ footer a { color:var(--muted);text-decoration:underline; }
   <div class="policy-block">
     <h2>10. Contact</h2>
     <p>For any questions regarding these Terms of Service, please contact:</p>
-    <p>Developer: Wenlong Du &nbsp;·&nbsp; <a href="mailto:dwl07947035150@gmail.com">dwl07947035150@gmail.com</a></p>
+    <p>Developer: Wenlong Du (RockyDWL) &nbsp;·&nbsp; <a href="mailto:dwl07947035150@gmail.com">dwl07947035150@gmail.com</a></p>
   </div>
 </div>
 
 <footer>
-  <p>© 2026 Wenlong Du (RockyDWL) &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;|&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms.html">Terms of Service</a></p>
+  <p>© 2026 Wenlong Du (RockyDWL) &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;|&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms.html">Terms of Service</a> &nbsp;|&nbsp; <a href="dashboard.html">Dashboard</a></p>
 </footer>
-
 </body>
 </html>
