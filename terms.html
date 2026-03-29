@@ -33,7 +33,6 @@ footer a { color:var(--muted);text-decoration:underline; }
 </style>
 </head>
 <body>
-
 <nav>
   <a class="nav-brand" href="index.html">ROCKYDWL / ADS-TOOL</a>
   <div class="nav-links">
@@ -43,90 +42,74 @@ footer a { color:var(--muted);text-decoration:underline; }
     <a class="nav-cta" href="dashboard.html">View Dashboard →</a>
   </div>
 </nav>
-
 <div class="page">
   <div class="page-label">Legal</div>
   <h1>Terms of Service</h1>
   <div class="meta">Effective Date: March 1, 2026 &nbsp;·&nbsp; Last Updated: March 2026</div>
-
   <div class="notice-box">
-    ✅ This is a private internal tool being developed by a single developer (Wenlong Du) with no public users. These terms define the intended scope and limitations of the tool as required by Google Ads API compliance. The tool is currently in development; Google Ads API integration is pending.
+    ✅ This is a private reporting tool operated by a single developer (Wenlong Du) for monitoring and analyzing the developer's own Google Ads campaign performance. It is not a commercial product and is not offered as a service to any external parties.
   </div>
 
   <div class="policy-block">
     <h2>1. Nature of This Tool</h2>
-    <p>This website describes a personal internal tool being developed by Wenlong Du (RockyDWL) for the purpose of monitoring and analyzing Google Ads campaign performance using the Google Ads API.</p>
-    <p>The RockyDWL Google Ads Management Tool is a personal, internal software tool being developed exclusively for managing and monitoring the developer's own Google Ads campaigns. It is not a commercial product, not a SaaS platform, and will not be offered as a service to any external parties.</p>
+    <p>The RockyDWL Google Ads Reporting Tool is a private software tool developed and operated by Wenlong Du for the purpose of monitoring and analyzing Google Ads campaign performance via the Google Ads API.</p>
+    <p>This tool is not a commercial product, not a SaaS platform, and is not offered as a service to any external parties. It exists to support the developer's own campaign analysis and reporting needs.</p>
   </div>
 
   <div class="policy-block">
-    <h2>2. Development Status</h2>
-    <p>This tool is currently in active development. The dashboard user interface has been built as a prototype. Google Ads API integration — including OAuth 2.0 authentication and GAQL-based data retrieval — is planned for the next phase of development.</p>
-    <p>All data currently shown in the dashboard is sample/placeholder data used for interface design and development purposes. No live Google Ads data is being accessed at this time.</p>
+    <h2>2. Purpose of the Tool</h2>
+    <p>This tool connects to the Google Ads API via OAuth 2.0 to retrieve campaign performance metrics — including impressions, clicks, cost, CTR, and conversions — from a Google Ads account owned and operated by the developer.</p>
+    <p>All API access is read-only. The tool does not create, modify, pause, or delete any campaigns, ads, bids, or budgets. It is used exclusively for performance reporting and analysis.</p>
   </div>
 
   <div class="policy-block">
-    <h2>3. Purpose of the Tool</h2>
-    <p>Once complete, the tool will be used to monitor and analyze Google Ads campaign performance using the Google Ads API. It will retrieve campaign performance metrics such as impressions, clicks, cost, and conversions from advertising accounts owned and operated by the developer.</p>
-    <p>All API requests will be read-only and used only for retrieving campaign performance data. The tool will not create, modify, or manage campaigns, ads, bids, or budgets.</p>
+    <h2>3. Scope of Access</h2>
+    <p>API access is restricted to a single Google Ads account owned and managed by Wenlong Du. The tool is not used to access accounts belonging to any third party. Access is authorized through a standard Google OAuth 2.0 flow with the <code>https://www.googleapis.com/auth/adwords</code> scope.</p>
   </div>
 
   <div class="policy-block">
-    <h2>4. No Public Service</h2>
-    <p>This tool is not and will not be offered as a public service or SaaS platform. It is intended solely for personal internal use by the developer, Wenlong Du, and will not be accessible to any external users or clients.</p>
-    <p>The tool will not be distributed, licensed, sublicensed, or made available to any third party under any circumstance.</p>
-  </div>
-
-  <div class="policy-block">
-    <h2>5. Intended Use</h2>
-    <p>This Tool is intended solely for personal use by the developer, Wenlong Du. All API access will be restricted to Google Ads accounts personally owned and operated by the developer. Prohibited uses include:</p>
+    <h2>4. Prohibited Uses</h2>
+    <p>The following uses are strictly prohibited:</p>
     <ul>
+      <li>Accessing any Google Ads account other than the developer's own</li>
+      <li>Creating, modifying, pausing, or deleting campaigns, ad groups, keywords, or bids</li>
       <li>Providing access to the tool or its data to any third party</li>
-      <li>Using the tool to access any Google Ads account other than the developer's own</li>
-      <li>Using the tool to modify, create, pause, or delete any campaigns, ad groups, keywords, or bids</li>
-      <li>Reselling, sublicensing, or commercializing the tool or its outputs in any form</li>
+      <li>Reselling, sublicensing, or commercializing the tool or its outputs</li>
     </ul>
   </div>
 
   <div class="policy-block">
-    <h2>6. Google Ads API Compliance</h2>
-    <p>All use of the Google Ads API through this Tool will comply with the <a href="https://developers.google.com/google-ads/api/terms" target="_blank" rel="noopener">Google Ads API Terms of Service</a> and Google's Developer Policies. The Tool is designed to use:</p>
+    <h2>5. Google Ads API Compliance</h2>
+    <p>All use of the Google Ads API through this Tool complies with the <a href="https://developers.google.com/google-ads/api/terms" target="_blank" rel="noopener">Google Ads API Terms of Service</a> and Google's Developer Policies. Specifically:</p>
     <ul>
-      <li>Read-only API access — no campaigns, bids, or budgets will be created or modified</li>
-      <li>OAuth2 authentication with the <code>https://www.googleapis.com/auth/adwords</code> scope</li>
-      <li>Access restricted exclusively to the developer's own Google Ads accounts</li>
-      <li>GAQL (Google Ads Query Language) for all reporting queries</li>
+      <li>Read-only API access — no campaigns, bids, or budgets are created or modified</li>
+      <li>OAuth2 authentication with standard adwords scope</li>
+      <li>Access restricted exclusively to accounts owned by the developer</li>
+      <li>All data queries performed using GAQL (Google Ads Query Language)</li>
     </ul>
   </div>
 
   <div class="policy-block">
-    <h2>7. No External User Access</h2>
-    <p>This Tool has no public-facing interface intended for external use. No external users, clients, or third parties will be able to access, use, or interact with the Tool in any capacity. The dashboard is a personal development interface accessible only to the developer, Wenlong Du.</p>
+    <h2>6. Data Handling</h2>
+    <p>All advertising data retrieved via the Google Ads API belongs to the developer's own accounts and is stored locally. No data is shared with third parties. The tool does not process or store personal data of any kind from external individuals.</p>
   </div>
 
   <div class="policy-block">
-    <h2>8. Data Responsibility</h2>
-    <p>All advertising data to be accessed through the Google Ads API belongs to the developer's own accounts. The developer is solely responsible for all API usage and ensures compliance with applicable Google policies at all times. No third-party data will be accessed or processed.</p>
-    <p>No advertising data will be shared with third parties. The tool does not store or process personal user data of any kind.</p>
+    <h2>7. No Warranty</h2>
+    <p>This Tool is operated for the developer's personal use. The developer assumes full responsibility for its operation and compliance with relevant terms of service. No warranty is offered to any party.</p>
   </div>
 
   <div class="policy-block">
-    <h2>9. No Warranty</h2>
-    <p>This Tool is provided for personal use only. The developer assumes full responsibility for its operation and compliance with relevant terms of service. There is no warranty, express or implied, offered to any party.</p>
-  </div>
-
-  <div class="policy-block">
-    <h2>10. Changes to These Terms</h2>
+    <h2>8. Changes to These Terms</h2>
     <p>The developer reserves the right to update these Terms at any time. Changes will be reflected on this page with an updated effective date.</p>
   </div>
 
   <div class="policy-block">
-    <h2>11. Contact</h2>
+    <h2>9. Contact</h2>
     <p>For any questions regarding these Terms of Service, please contact:</p>
     <p>Developer: Wenlong Du (RockyDWL) &nbsp;·&nbsp; <a href="mailto:dwl07947035150@gmail.com">dwl07947035150@gmail.com</a></p>
   </div>
 </div>
-
 <footer>
   <p>© 2026 Wenlong Du (RockyDWL) &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;|&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms.html">Terms of Service</a> &nbsp;|&nbsp; <a href="dashboard.html">Dashboard</a></p>
 </footer>
