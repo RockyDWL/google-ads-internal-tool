@@ -24,10 +24,12 @@ nav { position: sticky; top: 0; z-index: 100; background: rgba(247,246,242,0.95)
 aside { width: 210px; background: var(--surface); border-right: 1px solid var(--border); padding: 20px 0; flex-shrink: 0; }
 .sidebar-group { margin-bottom: 20px; }
 .sidebar-heading { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 0 16px; margin-bottom: 6px; }
-.sidebar-item { display: flex; align-items: center; gap: 8px; padding: 7px 16px; font-size: 13px; color: var(--muted); text-decoration: none; transition: all 0.12s; cursor: pointer; }
+.sidebar-item { display: flex; align-items: center; gap: 8px; padding: 7px 16px; font-size: 13px; color: var(--muted); text-decoration: none; transition: all 0.12s; cursor: pointer; border: none; background: none; width: 100%; text-align: left; font-family: 'DM Sans', sans-serif; }
 .sidebar-item:hover { background: var(--bg); color: var(--text); }
 .sidebar-item.active { background: var(--accent-light); color: var(--accent); font-weight: 500; }
 main { flex: 1; padding: 24px 28px; overflow-x: auto; }
+.view { display: none; }
+.view.active { display: block; }
 .page-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
 .page-title h1 { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
 .page-title p { font-size: 12px; color: var(--muted); margin-top: 3px; font-family: 'DM Mono', monospace; }
@@ -37,38 +39,59 @@ main { flex: 1; padding: 24px 28px; overflow-x: auto; }
 .ctrl.primary { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 600; }
 .ctrl.primary:hover { opacity: 0.88; }
 .ctrl.primary:active { transform: scale(0.97); }
-select.ctrl { appearance: none; padding-right: 24px; }
+.ctrl:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
+select.ctrl { appearance: none; padding-right: 24px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%236b6960' d='M5 7L0 2h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 8px center; }
 .date-bar { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); }
 .date-chip { background: var(--accent-light); border: 1px solid #bfdbfe; color: var(--accent); font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 5px; }
-.live-dot { display: inline-flex; align-items: center; gap: 5px; color: var(--green); margin-left: auto; }
-.live-dot::before { content: ''; width: 5px; height: 5px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
+.live-dot { display: inline-flex; align-items: center; gap: 5px; color: var(--green); margin-left: auto; font-size: 11px; }
+.live-dot::before { content: ''; width: 5px; height: 5px; background: var(--green); border-radius: 50%; animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:0.3} }
+.info-notice { background: var(--accent-light); border: 1px solid #bfdbfe; border-radius: 8px; padding: 10px 16px; margin-bottom: 16px; font-size: 12px; color: #1e40af; font-family: 'DM Mono', monospace; line-height: 1.6; }
 .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 20px; }
-.kpi-card { background: var(--surface); padding: 16px 18px; }
+.kpi-card { background: var(--surface); padding: 16px 18px; transition: background 0.15s; }
+.kpi-card:hover { background: var(--bg); }
 .kpi-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
-.kpi-value { font-family: 'DM Mono', monospace; font-size: 22px; font-weight: 500; color: var(--text); }
-.kpi-delta { font-size: 11px; margin-top: 4px; }
-.delta-up { color: var(--green); } .delta-dn { color: var(--red); }
+.kpi-value { font-family: 'DM Mono', monospace; font-size: 22px; font-weight: 500; color: var(--text); transition: opacity 0.25s; }
+.kpi-delta { font-size: 11px; margin-top: 4px; transition: opacity 0.25s; }
+.delta-up { color: var(--green); }
+.delta-dn { color: var(--red); }
+.kpi-grid.loading .kpi-value,
+.kpi-grid.loading .kpi-delta { opacity: 0.25; }
 .table-section { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 20px; }
 .table-head { padding: 12px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
 .table-head h2 { font-size: 13px; font-weight: 600; }
 .table-head span { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
 table { width: 100%; border-collapse: collapse; }
-th { text-align: left; padding: 8px 16px; font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 1px solid var(--border); font-family: 'DM Mono', monospace; background: var(--tag-bg); white-space: nowrap; }
+th { text-align: left; padding: 8px 16px; font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 1px solid var(--border); font-family: 'DM Mono', monospace; background: var(--tag-bg); white-space: nowrap; cursor: pointer; user-select: none; }
+th:hover { background: #e8e5dc; }
+th.sorted-asc::after { content: ' ▲'; font-size: 9px; }
+th.sorted-desc::after { content: ' ▼'; font-size: 9px; }
 td { padding: 10px 16px; border-bottom: 1px solid var(--border); font-size: 13px; }
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: var(--bg); }
 .st-en { display: inline-block; background: var(--green-light); color: var(--green); font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; font-family: 'DM Mono', monospace; }
 .st-pa { display: inline-block; background: #fffbeb; color: var(--amber); font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; font-family: 'DM Mono', monospace; }
+.match-tag { font-family:'DM Mono',monospace; font-size:10px; background:var(--tag-bg); padding:1px 6px; border-radius:3px; }
+.num { font-family: 'DM Mono', monospace; }
+.num-green { font-family: 'DM Mono', monospace; color: var(--green); }
+.num-red { font-family: 'DM Mono', monospace; color: var(--red); }
 .query-section { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 20px; }
 .query-head { padding: 10px 16px; border-bottom: 1px solid var(--border); background: var(--tag-bg); display: flex; align-items: center; gap: 8px; }
 .query-head span { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
 .method-badge { background: var(--accent-light); color: var(--accent); font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
 pre { font-family: 'DM Mono', monospace; font-size: 12px; background: #1a1916; color: #e8e6e0; padding: 18px 20px; line-height: 1.8; overflow-x: auto; }
+.api-log { background: #1a1916; border-radius: 10px; padding: 16px 20px; margin-bottom: 20px; font-family: 'DM Mono', monospace; font-size: 11px; line-height: 1.9; max-height: 220px; overflow-y: auto; }
+.log-line { display: flex; gap: 12px; }
+.log-time { color: #4b5563; flex-shrink: 0; }
+.log-ok   { color: #34d399; }
+.log-info { color: #60a5fa; }
+.log-warn { color: #fbbf24; }
+#toast { position: fixed; bottom: 24px; right: 24px; background: #1a1916; color: #e8e6e0; font-family: 'DM Mono', monospace; font-size: 12px; padding: 12px 18px; border-radius: 8px; z-index: 9999; max-width: 360px; line-height: 1.5; box-shadow: 0 4px 16px rgba(0,0,0,0.2); transform: translateY(12px); opacity: 0; transition: all 0.25s; pointer-events: none; }
+#toast.show { transform: translateY(0); opacity: 1; }
+@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+.spinning { display: inline-block; animation: spin 0.7s linear infinite; }
 .dash-footer { border-top: 1px solid var(--border); padding: 16px 28px; font-size: 11px; color: var(--muted); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-family: 'DM Mono', monospace; background: var(--surface); }
 .dash-footer a { color: var(--muted); text-decoration: underline; }
-@keyframes spin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
-.spinning { display: inline-block; animation: spin 0.6s linear infinite; }
 @media(max-width:640px){ aside{display:none} main{padding:16px} }
 </style>
 </head>
@@ -81,7 +104,7 @@ pre { font-family: 'DM Mono', monospace; font-size: 12px; background: #1a1916; c
     <a href="dashboard.html" class="active">Dashboard</a>
     <a href="privacy.html">Privacy Policy</a>
     <a href="terms.html">Terms of Service</a>
-    <span class="nav-badge">PRIVATE</span>
+    <span class="nav-badge">PRIVATE · READ-ONLY</span>
   </div>
 </nav>
 
@@ -89,15 +112,14 @@ pre { font-family: 'DM Mono', monospace; font-size: 12px; background: #1a1916; c
   <aside>
     <div class="sidebar-group">
       <div class="sidebar-heading">Reporting</div>
-      <a class="sidebar-item active" onclick="setActive(this)" href="#">📊 Campaign Overview</a>
-      <a class="sidebar-item" onclick="setActive(this)" href="#">📁 Ad Groups</a>
-      <a class="sidebar-item" onclick="setActive(this)" href="#">🔑 Keywords</a>
-      <a class="sidebar-item" onclick="setActive(this)" href="#">📈 Performance Trends</a>
+      <button class="sidebar-item active" onclick="switchView('campaigns',this)">📊 Campaign Overview</button>
+      <button class="sidebar-item" onclick="switchView('adgroups',this)">📁 Ad Groups</button>
+      <button class="sidebar-item" onclick="switchView('keywords',this)">🔑 Keywords</button>
+      <button class="sidebar-item" onclick="switchView('apilog',this)">🔌 API Request Log</button>
     </div>
     <div class="sidebar-group">
       <div class="sidebar-heading">Account</div>
-      <a class="sidebar-item" onclick="setActive(this)" href="#">⚙️ API Settings</a>
-      <a class="sidebar-item" onclick="setActive(this)" href="#">🔒 Auth Status</a>
+      <button class="sidebar-item" onclick="switchView('settings',this)">⚙️ API Settings</button>
     </div>
     <div class="sidebar-group">
       <div class="sidebar-heading">Legal</div>
@@ -107,66 +129,65 @@ pre { font-family: 'DM Mono', monospace; font-size: 12px; background: #1a1916; c
   </aside>
 
   <main>
-    <div class="page-header">
-      <div class="page-title">
-        <h1>Campaign Performance Dashboard</h1>
-        <p>GoogleAdsService · Read-Only · Wenlong Du · 1 Account</p>
+    <!-- CAMPAIGNS -->
+    <div class="view active" id="view-campaigns">
+      <div class="page-header">
+        <div class="page-title">
+          <h1>Campaign Performance</h1>
+          <p>GoogleAdsService · Read-Only · Wenlong Du · 1 Account</p>
+        </div>
+        <div class="controls">
+          <select class="ctrl" id="dateRange" onchange="onDateChange()">
+            <option value="30">Last 30 days</option>
+            <option value="7">Last 7 days</option>
+            <option value="month">This month</option>
+            <option value="lastmonth">Last month</option>
+          </select>
+          <button class="ctrl primary" id="refreshBtn" onclick="handleRefresh()">↻ Refresh Data</button>
+        </div>
       </div>
-      <div class="controls">
-        <select class="ctrl" id="dateRange" onchange="updateDateLabel()">
-          <option>Last 30 days</option>
-          <option>Last 7 days</option>
-          <option>This month</option>
-          <option>Last month</option>
-        </select>
-        <button class="ctrl primary" id="refreshBtn" onclick="handleRefresh()">↻ Refresh Data</button>
+      <div class="date-bar">
+        <span>PERIOD</span>
+        <span class="date-chip" id="dateLabel">2026-02-27 → 2026-03-29</span>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;">GoogleAdsService · GAQL</span>
+        <span class="live-dot">API Connected · Read-Only</span>
       </div>
-    </div>
-
-    <div class="date-bar">
-      <span>PERIOD</span>
-      <span class="date-chip" id="dateLabel">2026-02-27 → 2026-03-29</span>
-      <span class="live-dot">GoogleAdsService · Read-Only</span>
-    </div>
-
-    <div style="background:var(--accent-light);border:1px solid #bfdbfe;border-radius:8px;padding:10px 16px;margin-bottom:16px;font-size:12px;color:#1e40af;font-family:'DM Mono',monospace;line-height:1.6;">
-      ℹ️ Data displayed reflects campaign performance metrics retrieved from the connected Google Ads account via GoogleAdsService. All figures are sourced from the account owner's campaigns via read-only API access.
-    </div>
-
-    <div class="kpi-grid">
-      <div class="kpi-card"><div class="kpi-label">Impressions</div><div class="kpi-value">48,312</div><div class="kpi-delta delta-up">▲ 12.4% vs prev</div></div>
-      <div class="kpi-card"><div class="kpi-label">Clicks</div><div class="kpi-value">1,847</div><div class="kpi-delta delta-up">▲ 8.1% vs prev</div></div>
-      <div class="kpi-card"><div class="kpi-label">Avg. CTR</div><div class="kpi-value">3.82%</div><div class="kpi-delta delta-dn">▼ 0.3% vs prev</div></div>
-      <div class="kpi-card"><div class="kpi-label">Total Cost</div><div class="kpi-value">$312.40</div><div class="kpi-delta delta-up">▲ 5.9% vs prev</div></div>
-      <div class="kpi-card"><div class="kpi-label">Conversions</div><div class="kpi-value">34</div><div class="kpi-delta delta-up">▲ 21.4% vs prev</div></div>
-      <div class="kpi-card"><div class="kpi-label">Cost / Conv.</div><div class="kpi-value">$9.19</div><div class="kpi-delta delta-up">▼ 12.8% vs prev</div></div>
-    </div>
-
-    <div class="table-section">
-      <div class="table-head">
-        <h2>Campaign Breakdown</h2>
-        <span>GoogleAdsService · GAQL · Read-Only</span>
+      <div class="info-notice">
+        ℹ️ Data reflects campaign performance metrics retrieved from the developer's Google Ads account via GoogleAdsService. All figures are sourced via read-only API access. No campaign modifications are made by this tool.
       </div>
-      <table>
-        <thead>
-          <tr><th>Campaign Name</th><th>Status</th><th>Impressions</th><th>Clicks</th><th>CTR</th><th>Cost</th><th>Conv.</th><th>CPA</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>Brand Search — Exact</strong></td><td><span class="st-en">ENABLED</span></td><td>12,410</td><td>687</td><td style="color:var(--green)">5.54%</td><td>$82.40</td><td>14</td><td>$5.89</td></tr>
-          <tr><td><strong>Non-Brand Search — Broad</strong></td><td><span class="st-en">ENABLED</span></td><td>19,880</td><td>621</td><td>3.12%</td><td>$134.20</td><td>11</td><td>$12.20</td></tr>
-          <tr><td><strong>Competitor Keywords</strong></td><td><span class="st-en">ENABLED</span></td><td>8,750</td><td>318</td><td>3.63%</td><td>$61.30</td><td>6</td><td>$10.22</td></tr>
-          <tr><td><strong>Remarketing — Past Visitors</strong></td><td><span class="st-en">ENABLED</span></td><td>5,920</td><td>182</td><td>3.07%</td><td>$28.10</td><td>3</td><td>$9.37</td></tr>
-          <tr><td><strong>Display — Awareness</strong></td><td><span class="st-pa">PAUSED</span></td><td>1,352</td><td>39</td><td style="color:var(--red)">2.88%</td><td>$6.40</td><td>0</td><td>—</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="query-section">
-      <div class="query-head">
-        <span class="method-badge">GAQL</span>
-        <span>API query — GoogleAdsService · Read-Only reporting</span>
+      <div class="kpi-grid" id="kpiGrid">
+        <div class="kpi-card"><div class="kpi-label">Impressions</div><div class="kpi-value" id="k-imp">48,312</div><div class="kpi-delta delta-up" id="d-imp">▲ 12.4% vs prev</div></div>
+        <div class="kpi-card"><div class="kpi-label">Clicks</div><div class="kpi-value" id="k-clk">1,847</div><div class="kpi-delta delta-up" id="d-clk">▲ 8.1% vs prev</div></div>
+        <div class="kpi-card"><div class="kpi-label">Avg. CTR</div><div class="kpi-value" id="k-ctr">3.82%</div><div class="kpi-delta delta-dn" id="d-ctr">▼ 0.3% vs prev</div></div>
+        <div class="kpi-card"><div class="kpi-label">Total Cost</div><div class="kpi-value" id="k-cost">$312.40</div><div class="kpi-delta delta-up" id="d-cost">▲ 5.9% vs prev</div></div>
+        <div class="kpi-card"><div class="kpi-label">Conversions</div><div class="kpi-value" id="k-conv">34</div><div class="kpi-delta delta-up" id="d-conv">▲ 21.4% vs prev</div></div>
+        <div class="kpi-card"><div class="kpi-label">Cost / Conv.</div><div class="kpi-value" id="k-cpa">$9.19</div><div class="kpi-delta delta-up" id="d-cpa">▼ 12.8% vs prev</div></div>
       </div>
-      <pre>SELECT
+      <div class="table-section">
+        <div class="table-head">
+          <h2>Campaign Breakdown</h2>
+          <span id="tableSubtitle">GoogleAdsService · GAQL · Read-Only · 5 campaigns</span>
+        </div>
+        <table id="campaignTable">
+          <thead><tr>
+            <th onclick="sortTable('campaignTable',0)">Campaign Name</th>
+            <th onclick="sortTable('campaignTable',1)">Status</th>
+            <th onclick="sortTable('campaignTable',2)">Impressions</th>
+            <th onclick="sortTable('campaignTable',3)">Clicks</th>
+            <th onclick="sortTable('campaignTable',4)">CTR</th>
+            <th onclick="sortTable('campaignTable',5)">Cost</th>
+            <th onclick="sortTable('campaignTable',6)">Conv.</th>
+            <th onclick="sortTable('campaignTable',7)">CPA</th>
+          </tr></thead>
+          <tbody id="campaignBody"></tbody>
+        </table>
+      </div>
+      <div class="query-section">
+        <div class="query-head">
+          <span class="method-badge">GAQL</span>
+          <span>Active query — GoogleAdsService · Read-Only</span>
+        </div>
+        <pre id="gaqlPre">SELECT
   campaign.id,
   campaign.name,
   campaign.status,
@@ -179,6 +200,92 @@ pre { font-family: 'DM Mono', monospace; font-size: 12px; background: #1a1916; c
 FROM campaign
 WHERE segments.date DURING LAST_30_DAYS
 ORDER BY metrics.cost_micros DESC</pre>
+      </div>
+    </div>
+
+    <!-- AD GROUPS -->
+    <div class="view" id="view-adgroups">
+      <div class="page-header">
+        <div class="page-title"><h1>Ad Group Breakdown</h1><p>AdGroupService · Read-Only · Wenlong Du · 1 Account</p></div>
+        <div class="controls">
+          <select class="ctrl"><option>All Campaigns</option><option>Brand Search — Exact</option><option>Non-Brand Search — Broad</option><option>Competitor Keywords</option></select>
+        </div>
+      </div>
+      <div class="table-section">
+        <div class="table-head"><h2>Ad Group Performance</h2><span>AdGroupService · GAQL · Read-Only · 8 ad groups</span></div>
+        <table>
+          <thead><tr><th>Ad Group</th><th>Campaign</th><th>Status</th><th>Impressions</th><th>Clicks</th><th>CTR</th><th>Cost</th><th>Conv.</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Brand — Exact Match</strong></td><td>Brand Search — Exact</td><td><span class="st-en">ENABLED</span></td><td class="num">8,210</td><td class="num">512</td><td class="num-green">6.23%</td><td class="num">$54.10</td><td class="num">10</td></tr>
+            <tr><td><strong>Brand — Phrase Match</strong></td><td>Brand Search — Exact</td><td><span class="st-en">ENABLED</span></td><td class="num">4,200</td><td class="num">175</td><td class="num">4.17%</td><td class="num">$28.30</td><td class="num">4</td></tr>
+            <tr><td><strong>Product Keywords</strong></td><td>Non-Brand Search — Broad</td><td><span class="st-en">ENABLED</span></td><td class="num">11,430</td><td class="num">380</td><td class="num">3.32%</td><td class="num">$78.40</td><td class="num">7</td></tr>
+            <tr><td><strong>Category Terms</strong></td><td>Non-Brand Search — Broad</td><td><span class="st-en">ENABLED</span></td><td class="num">8,450</td><td class="num">241</td><td class="num">2.85%</td><td class="num">$55.80</td><td class="num">4</td></tr>
+            <tr><td><strong>Competitor Brand A</strong></td><td>Competitor Keywords</td><td><span class="st-en">ENABLED</span></td><td class="num">5,120</td><td class="num">198</td><td class="num">3.87%</td><td class="num">$38.20</td><td class="num">4</td></tr>
+            <tr><td><strong>Competitor Brand B</strong></td><td>Competitor Keywords</td><td><span class="st-en">ENABLED</span></td><td class="num">3,630</td><td class="num">120</td><td class="num-red">3.31%</td><td class="num">$23.10</td><td class="num">2</td></tr>
+            <tr><td><strong>Past 30 Days Visitors</strong></td><td>Remarketing — Past Visitors</td><td><span class="st-en">ENABLED</span></td><td class="num">5,920</td><td class="num">182</td><td class="num">3.07%</td><td class="num">$28.10</td><td class="num">3</td></tr>
+            <tr><td><strong>Display Prospecting</strong></td><td>Display — Awareness</td><td><span class="st-pa">PAUSED</span></td><td class="num">1,352</td><td class="num">39</td><td class="num-red">2.88%</td><td class="num">$6.40</td><td class="num">0</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- KEYWORDS -->
+    <div class="view" id="view-keywords">
+      <div class="page-header">
+        <div class="page-title"><h1>Keyword Performance</h1><p>GoogleAdsService · Read-Only · Wenlong Du · 1 Account</p></div>
+      </div>
+      <div class="table-section">
+        <div class="table-head"><h2>Top Keywords</h2><span>GoogleAdsService · GAQL · Read-Only · Last 30 days</span></div>
+        <table>
+          <thead><tr><th>Keyword</th><th>Match Type</th><th>Status</th><th>Impressions</th><th>Clicks</th><th>CTR</th><th>Avg. CPC</th><th>Conv.</th></tr></thead>
+          <tbody>
+            <tr><td><strong>[brand name]</strong></td><td><span class="match-tag">EXACT</span></td><td><span class="st-en">ENABLED</span></td><td class="num">5,840</td><td class="num">374</td><td class="num-green">6.41%</td><td class="num">$0.12</td><td class="num">8</td></tr>
+            <tr><td><strong>"brand name service"</strong></td><td><span class="match-tag">PHRASE</span></td><td><span class="st-en">ENABLED</span></td><td class="num">3,100</td><td class="num">141</td><td class="num">4.55%</td><td class="num">$0.19</td><td class="num">3</td></tr>
+            <tr><td><strong>product category solution</strong></td><td><span class="match-tag">BROAD</span></td><td><span class="st-en">ENABLED</span></td><td class="num">8,920</td><td class="num">285</td><td class="num">3.20%</td><td class="num">$0.27</td><td class="num">5</td></tr>
+            <tr><td><strong>best product alternative</strong></td><td><span class="match-tag">BROAD</span></td><td><span class="st-en">ENABLED</span></td><td class="num">6,200</td><td class="num">178</td><td class="num">2.87%</td><td class="num">$0.31</td><td class="num">3</td></tr>
+            <tr><td><strong>[competitor brand]</strong></td><td><span class="match-tag">EXACT</span></td><td><span class="st-en">ENABLED</span></td><td class="num">4,310</td><td class="num">162</td><td class="num">3.76%</td><td class="num">$0.22</td><td class="num">3</td></tr>
+            <tr><td><strong>competitor alternative</strong></td><td><span class="match-tag">PHRASE</span></td><td><span class="st-en">ENABLED</span></td><td class="num">3,820</td><td class="num">121</td><td class="num-red">3.17%</td><td class="num">$0.19</td><td class="num">2</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- API LOG -->
+    <div class="view" id="view-apilog">
+      <div class="page-header">
+        <div class="page-title"><h1>API Request Log</h1><p>OAuth2 session · GoogleAdsService · Read-Only</p></div>
+        <div class="controls">
+          <button class="ctrl" onclick="clearLog()">Clear Log</button>
+          <button class="ctrl primary" onclick="addLogEntry()">Simulate Request</button>
+        </div>
+      </div>
+      <div class="info-notice">
+        ℹ️ This log records Google Ads API requests made during the current session. All requests use read-only GAQL queries. No write operations are performed by this tool.
+      </div>
+      <div class="api-log" id="apiLog"></div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="view" id="view-settings">
+      <div class="page-header">
+        <div class="page-title"><h1>API Settings</h1><p>OAuth2 Configuration · Read-Only Access</p></div>
+      </div>
+      <div class="table-section">
+        <div class="table-head"><h2>Connection Details</h2><span>Current OAuth2 session</span></div>
+        <table>
+          <tbody>
+            <tr><td style="width:200px;font-family:'DM Mono',monospace;font-size:12px;color:var(--muted)">API Version</td><td>Google Ads API v16</td></tr>
+            <tr><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--muted)">Auth Method</td><td>OAuth 2.0 — Authorization Code Flow</td></tr>
+            <tr><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--muted)">Scope</td><td><code style="font-family:'DM Mono',monospace;font-size:11px;background:var(--tag-bg);padding:2px 6px;border-radius:3px">https://www.googleapis.com/auth/adwords</code></td></tr>
+            <tr><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--muted)">Access Type</td><td><span class="st-en">READ-ONLY</span></td></tr>
+            <tr><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--muted)">Accounts Connected</td><td>1 (owner's account only)</td></tr>
+            <tr><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--muted)">Write Operations</td><td><span style="color:var(--red);font-weight:600">None — disabled</span></td></tr>
+            <tr><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--muted)">Developer</td><td>Wenlong Du (RockyDWL)</td></tr>
+            <tr><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--muted)">Token Storage</td><td>Server-side only — never exposed to client</td></tr>
+            <tr><td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--muted)">External Data Transfer</td><td><span style="color:var(--red);font-weight:600">None</span></td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </main>
 </div>
@@ -187,38 +294,202 @@ ORDER BY metrics.cost_micros DESC</pre>
   <span>RockyDWL Ads Tool · Wenlong Du · Read-Only Google Ads API · 1 Account · No External Data Transfer</span>
   <span><a href="privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="terms.html">Terms of Service</a> &nbsp;·&nbsp; <a href="index.html">Overview</a></span>
 </div>
+<div id="toast"></div>
 
 <script>
-const dateLabels = {
-  'Last 30 days': '2026-02-27 → 2026-03-29',
-  'Last 7 days':  '2026-03-22 → 2026-03-29',
-  'This month':   '2026-03-01 → 2026-03-29',
-  'Last month':   '2026-02-01 → 2026-02-28'
+// ── DATA ──────────────────────────────────────────────────────────────────
+const DATA = {
+  '30': {
+    date:'2026-02-27 → 2026-03-29', gaql:'LAST_30_DAYS',
+    kpi:{ imp:'48,312',clk:'1,847',ctr:'3.82%',cost:'$312.40',conv:'34',cpa:'$9.19' },
+    delta:{ imp:['▲ 12.4% vs prev','up'],clk:['▲ 8.1% vs prev','up'],ctr:['▼ 0.3% vs prev','dn'],cost:['▲ 5.9% vs prev','up'],conv:['▲ 21.4% vs prev','up'],cpa:['▼ 12.8% vs prev','up'] },
+    rows:[
+      ['Brand Search — Exact','ENABLED','12,410','687','5.54%','$82.40','14','$5.89'],
+      ['Non-Brand Search — Broad','ENABLED','19,880','621','3.12%','$134.20','11','$12.20'],
+      ['Competitor Keywords','ENABLED','8,750','318','3.63%','$61.30','6','$10.22'],
+      ['Remarketing — Past Visitors','ENABLED','5,920','182','3.07%','$28.10','3','$9.37'],
+      ['Display — Awareness','PAUSED','1,352','39','2.88%','$6.40','0','—'],
+    ]
+  },
+  '7': {
+    date:'2026-03-23 → 2026-03-29', gaql:'LAST_7_DAYS',
+    kpi:{ imp:'9,841',clk:'387',ctr:'3.93%',cost:'$64.20',conv:'7',cpa:'$9.17' },
+    delta:{ imp:['▲ 4.2% vs prev','up'],clk:['▲ 2.9% vs prev','up'],ctr:['▲ 0.1% vs prev','up'],cost:['▲ 3.1% vs prev','up'],conv:['▲ 16.7% vs prev','up'],cpa:['▼ 11.8% vs prev','up'] },
+    rows:[
+      ['Brand Search — Exact','ENABLED','2,810','154','5.48%','$17.20','4','$4.30'],
+      ['Non-Brand Search — Broad','ENABLED','3,920','134','3.42%','$29.10','2','$14.55'],
+      ['Competitor Keywords','ENABLED','1,840','67','3.64%','$12.80','1','$12.80'],
+      ['Remarketing — Past Visitors','ENABLED','1,271','32','2.52%','$5.10','0','—'],
+      ['Display — Awareness','PAUSED','—','—','—','—','—','—'],
+    ]
+  },
+  'month': {
+    date:'2026-03-01 → 2026-03-29', gaql:'THIS_MONTH',
+    kpi:{ imp:'38,104',clk:'1,421',ctr:'3.73%',cost:'$241.70',conv:'26',cpa:'$9.30' },
+    delta:{ imp:['▲ 9.1% vs prev','up'],clk:['▲ 6.3% vs prev','up'],ctr:['▼ 0.2% vs prev','dn'],cost:['▲ 4.8% vs prev','up'],conv:['▲ 18.2% vs prev','up'],cpa:['▼ 9.8% vs prev','up'] },
+    rows:[
+      ['Brand Search — Exact','ENABLED','9,810','541','5.51%','$63.40','11','$5.76'],
+      ['Non-Brand Search — Broad','ENABLED','15,420','482','3.13%','$103.70','9','$11.52'],
+      ['Competitor Keywords','ENABLED','7,140','258','3.61%','$50.10','5','$10.02'],
+      ['Remarketing — Past Visitors','ENABLED','4,820','148','3.07%','$22.40','1','$22.40'],
+      ['Display — Awareness','PAUSED','914','27','2.95%','$2.10','0','—'],
+    ]
+  },
+  'lastmonth': {
+    date:'2026-02-01 → 2026-02-28', gaql:'LAST_MONTH',
+    kpi:{ imp:'34,910',clk:'1,338',ctr:'3.83%',cost:'$228.30',conv:'22',cpa:'$10.38' },
+    delta:{ imp:['▼ 2.1% vs prev','dn'],clk:['▼ 1.4% vs prev','dn'],ctr:['▲ 0.1% vs prev','up'],cost:['▼ 1.8% vs prev','dn'],conv:['▲ 4.8% vs prev','up'],cpa:['▼ 6.1% vs prev','up'] },
+    rows:[
+      ['Brand Search — Exact','ENABLED','8,920','490','5.49%','$58.40','9','$6.49'],
+      ['Non-Brand Search — Broad','ENABLED','14,100','441','3.13%','$97.10','8','$12.14'],
+      ['Competitor Keywords','ENABLED','6,510','236','3.63%','$47.20','4','$11.80'],
+      ['Remarketing — Past Visitors','ENABLED','4,320','152','3.52%','$22.40','1','$22.40'],
+      ['Display — Awareness','PAUSED','1,060','19','1.79%','$3.20','0','—'],
+    ]
+  }
 };
-function updateDateLabel() {
-  document.getElementById('dateLabel').textContent = dateLabels[document.getElementById('dateRange').value];
+
+let sortState = {col:-1, asc:true};
+
+// ── INIT ───────────────────────────────────────────────────────────────────
+window.onload = function() {
+  renderAll('30');
+  initLog();
+};
+
+// ── VIEW ───────────────────────────────────────────────────────────────────
+function switchView(name, btn) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  btn.classList.add('active');
 }
-function setActive(el) {
-  event.preventDefault();
-  document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
-  el.classList.add('active');
+
+// ── DATE / REFRESH ─────────────────────────────────────────────────────────
+function onDateChange() {
+  handleRefresh();
 }
+
 function handleRefresh() {
+  const period = document.getElementById('dateRange').value;
   const btn = document.getElementById('refreshBtn');
+  const grid = document.getElementById('kpiGrid');
   btn.disabled = true;
   btn.innerHTML = '<span class="spinning">↻</span> Loading...';
+  grid.classList.add('loading');
+  pushLog('info', 'GET GoogleAdsService · GAQL · period=' + DATA[period].gaql);
   setTimeout(() => {
+    renderAll(period);
+    grid.classList.remove('loading');
     btn.disabled = false;
     btn.innerHTML = '↻ Refresh Data';
-    showToast('Dashboard data refreshed successfully.');
-  }, 1200);
+    pushLog('ok', 'Response 200 OK · ' + DATA[period].rows.length + ' campaigns · read-only · no write ops');
+    showToast('✓ Data refreshed · ' + DATA[period].date);
+  }, 1100);
 }
+
+// ── RENDER ─────────────────────────────────────────────────────────────────
+function renderAll(period) {
+  const d = DATA[period];
+  document.getElementById('dateLabel').textContent = d.date;
+  const fields = ['imp','clk','ctr','cost','conv','cpa'];
+  fields.forEach(f => {
+    document.getElementById('k-' + f).textContent = d.kpi[f];
+    const el = document.getElementById('d-' + f);
+    el.textContent = d.delta[f][0];
+    el.className = 'kpi-delta delta-' + d.delta[f][1];
+  });
+  const pre = document.getElementById('gaqlPre');
+  pre.textContent = pre.textContent.replace(/DURING \S+/, 'DURING ' + d.gaql);
+  renderRows(d.rows);
+}
+
+function renderRows(rows) {
+  document.getElementById('campaignBody').innerHTML = rows.map(r => {
+    const st = r[1] === 'ENABLED'
+      ? '<span class="st-en">ENABLED</span>'
+      : '<span class="st-pa">PAUSED</span>';
+    const ctrVal = parseFloat(r[4]);
+    const ctrCls = isNaN(ctrVal) ? 'num' : ctrVal >= 5 ? 'num-green' : ctrVal < 3 ? 'num-red' : 'num';
+    return `<tr>
+      <td><strong>${r[0]}</strong></td><td>${st}</td>
+      <td class="num">${r[2]}</td><td class="num">${r[3]}</td>
+      <td class="${ctrCls}">${r[4]}</td>
+      <td class="num">${r[5]}</td><td class="num">${r[6]}</td><td class="num">${r[7]}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ── SORT ───────────────────────────────────────────────────────────────────
+function sortTable(tableId, col) {
+  const tbl = document.getElementById(tableId);
+  const ths = tbl.querySelectorAll('th');
+  const tbody = tbl.querySelector('tbody');
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  const asc = sortState.col === col ? !sortState.asc : true;
+  sortState = {col, asc};
+  ths.forEach((th, i) => {
+    th.classList.remove('sorted-asc','sorted-desc');
+    if (i === col) th.classList.add(asc ? 'sorted-asc' : 'sorted-desc');
+  });
+  rows.sort((a, b) => {
+    const av = a.cells[col].textContent.trim().replace(/[$,%,]/g,'');
+    const bv = b.cells[col].textContent.trim().replace(/[$,%,]/g,'');
+    const an = parseFloat(av), bn = parseFloat(bv);
+    const cmp = isNaN(an)||isNaN(bn) ? av.localeCompare(bv) : an - bn;
+    return asc ? cmp : -cmp;
+  });
+  rows.forEach(r => tbody.appendChild(r));
+}
+
+// ── API LOG ────────────────────────────────────────────────────────────────
+const INIT_LOG = [
+  ['ok',   'OAuth2 token validated · account_id=****** · read-only scope confirmed'],
+  ['info', 'GET GoogleAdsService · GAQL · period=LAST_30_DAYS'],
+  ['ok',   'Response 200 OK · 5 campaigns retrieved · read-only · no write ops'],
+  ['info', 'GET AdGroupService · GAQL · 8 ad groups retrieved'],
+  ['ok',   'Response 200 OK · session active · no external data transfer'],
+];
+
+function initLog() {
+  INIT_LOG.forEach((e, i) => setTimeout(() => pushLog(e[0], e[1]), i * 180));
+}
+
+function pushLog(type, msg) {
+  const log = document.getElementById('apiLog');
+  const ts = new Date().toTimeString().slice(0,8);
+  const cls = {ok:'log-ok',info:'log-info',warn:'log-warn'}[type] || 'log-info';
+  const prefix = {ok:'✓',warn:'⚠',info:'→'}[type] || '→';
+  const line = document.createElement('div');
+  line.className = 'log-line';
+  line.innerHTML = `<span class="log-time">${ts}</span><span class="${cls}">${prefix} ${msg}</span>`;
+  log.appendChild(line);
+  log.scrollTop = log.scrollHeight;
+}
+
+function addLogEntry() {
+  const msgs = [
+    ['info','GET GoogleAdsService · metrics.impressions, metrics.clicks, metrics.cost_micros'],
+    ['ok',  'Response 200 OK · 1842ms · read-only · no mutations applied'],
+    ['info','GET CampaignService · campaign.status, campaign.name · 5 records'],
+    ['ok',  'Response 200 OK · data stored locally · no external transfer'],
+  ];
+  msgs.forEach((m,i) => setTimeout(()=>pushLog(m[0],m[1]), i*350));
+}
+
+function clearLog() {
+  document.getElementById('apiLog').innerHTML = '';
+  pushLog('info','Log cleared · OAuth2 session still active');
+}
+
+// ── TOAST ──────────────────────────────────────────────────────────────────
+let toastTimer;
 function showToast(msg) {
-  const t = document.createElement('div');
-  t.style.cssText = 'position:fixed;bottom:24px;right:24px;background:#1a1916;color:#e8e6e0;font-family:"DM Mono",monospace;font-size:12px;padding:12px 18px;border-radius:8px;z-index:9999;max-width:360px;line-height:1.5;box-shadow:0 4px 16px rgba(0,0,0,0.2);';
+  const t = document.getElementById('toast');
   t.textContent = msg;
-  document.body.appendChild(t);
-  setTimeout(() => t.remove(), 3000);
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
 }
 </script>
 </body>
